@@ -134,6 +134,11 @@ ALTER TABLE `itens_compra`
 --
 
 --
+-- AUTO_INCREMENT for table `bebidas`
+--
+ALTER TABLE `bebidas`
+  MODIFY `id_bebida` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `cidades`
 --
 ALTER TABLE `cidades`
