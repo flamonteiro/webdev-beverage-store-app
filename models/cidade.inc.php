@@ -13,6 +13,22 @@
 
       function setCidade($cidade, $estado, $CEP, $valorfrete_porPeso, $peso)
       {
+               if(trim($cidade) === ''){
+                   throw new InvalidArgumentException('Nome da cidade nao pode ser vazio.');
+               }
+               if(!preg_match('/^[A-Za-z]{2}$/', $estado)){
+                   throw new InvalidArgumentException('Estado deve ter exatamente 2 letras (UF).');
+               }
+               if(trim($CEP) === ''){
+                   throw new InvalidArgumentException('CEP nao pode ser vazio.');
+               }
+               if(!is_numeric($valorfrete_porPeso) || $valorfrete_porPeso < 0){
+                   throw new InvalidArgumentException('Valor do frete por peso nao pode ser negativo.');
+               }
+               if(!is_numeric($peso) || $peso < 0){
+                   throw new InvalidArgumentException('Peso nao pode ser negativo.');
+               }
+
                $this->cidade = $cidade;
                $this->estado = $estado;
                $this->CEP = $CEP;

@@ -14,6 +14,25 @@
 
       function setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante)
       {
+               if(trim($nome) === ''){
+                   throw new InvalidArgumentException('Nome da bebida nao pode ser vazio.');
+               }
+               if(trim($volume) === ''){
+                   throw new InvalidArgumentException('Volume da bebida nao pode ser vazio.');
+               }
+               if(!is_numeric($preco) || $preco <= 0){
+                   throw new InvalidArgumentException('Preco deve ser um numero maior que zero.');
+               }
+               if(!is_numeric($peso) || $peso <= 0){
+                   throw new InvalidArgumentException('Peso deve ser um numero maior que zero.');
+               }
+               if(!is_numeric($qde_estoque) || $qde_estoque < 0){
+                   throw new InvalidArgumentException('Quantidade em estoque nao pode ser negativa.');
+               }
+               if(trim($fabricante) === ''){
+                   throw new InvalidArgumentException('Fabricante nao pode ser vazio.');
+               }
+
                $this->nome = $nome;
                $this->volume = $volume;
                $this->preco = $preco;

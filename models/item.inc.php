@@ -7,6 +7,10 @@ class Item {
        private $valorItem;
 
       function __construct($bebida){
+       if(!($bebida instanceof Bebida)){
+           throw new InvalidArgumentException('Item precisa de uma Bebida valida.');
+       }
+
        $this->bebida = $bebida;
        $this->quantidade = 1;
        $this->valorItem = $this->bebida->getPreco();

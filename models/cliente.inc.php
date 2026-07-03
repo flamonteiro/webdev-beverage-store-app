@@ -14,6 +14,25 @@
 
       function setCliente($nome, $cnpj, $endereco, $id_cidade, $email, $senha)
       {
+               if(trim($nome) === ''){
+                   throw new InvalidArgumentException('Nome nao pode ser vazio.');
+               }
+               if(trim($cnpj) === ''){
+                   throw new InvalidArgumentException('CNPJ nao pode ser vazio.');
+               }
+               if(trim($endereco) === ''){
+                   throw new InvalidArgumentException('Endereco nao pode ser vazio.');
+               }
+               if(!is_numeric($id_cidade) || $id_cidade <= 0){
+                   throw new InvalidArgumentException('Cidade invalida.');
+               }
+               if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                   throw new InvalidArgumentException('Email invalido.');
+               }
+               if(strlen($senha) < 6){
+                   throw new InvalidArgumentException('Senha deve ter pelo menos 6 caracteres.');
+               }
+
                $this->nome = $nome;
                $this->cnpj = $cnpj;
                $this->endereco = $endereco;

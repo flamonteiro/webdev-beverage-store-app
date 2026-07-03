@@ -6,6 +6,16 @@
        private $data_compra;
 
       function __construct($id_cliente, $valor_total, $valortotal_frete){
+              if(!is_numeric($id_cliente) || $id_cliente <= 0){
+                  throw new InvalidArgumentException('Cliente invalido.');
+              }
+              if(!is_numeric($valor_total) || $valor_total <= 0){
+                  throw new InvalidArgumentException('Valor total deve ser maior que zero.');
+              }
+              if(!is_numeric($valortotal_frete) || $valortotal_frete < 0){
+                  throw new InvalidArgumentException('Valor do frete nao pode ser negativo.');
+              }
+
               $this->id_cliente = $id_cliente;
               $this->valor_total = $valor_total;
               $this->valortotal_frete = $valortotal_frete;
