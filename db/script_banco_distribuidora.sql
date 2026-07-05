@@ -158,6 +158,26 @@ ALTER TABLE `compras`
 --
 ALTER TABLE `itens_compra`
   MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for table `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `fk_clientes_cidades` FOREIGN KEY (`id_cidade`) REFERENCES `cidades` (`id_cidade`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `fk_compras_clientes` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `itens_compra`
+--
+ALTER TABLE `itens_compra`
+  ADD CONSTRAINT `fk_itens_compra_bebidas` FOREIGN KEY (`id_bebida`) REFERENCES `bebidas` (`id_bebida`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_itens_compra_compras` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id_compra`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
