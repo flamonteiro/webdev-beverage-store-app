@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `distribuidora`
 --
+CREATE DATABASE IF NOT EXISTS `distribuidora` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `distribuidora`;
 
 -- --------------------------------------------------------
 

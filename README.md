@@ -72,15 +72,13 @@ Total Sale = Products Total + Freight
 │   ├── Bebida.php
 │   ├── Cidade.php
 │   ├── Cliente.php
-│   ├── Pedido.php
-│   └── Venda.php
+│   └── Pedido.php
 │
 ├── controllers/              # Business logic
 │   ├── AuthController.php
 │   ├── BebidaController.php
 │   ├── CidadeController.php
-│   ├── PedidoController.php
-│   └── VendaController.php
+│   └── PedidoController.php
 │
 ├── views/
 │   ├── layouts/

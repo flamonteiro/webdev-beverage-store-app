@@ -1,4 +1,3 @@
-	id_cidade	cidade	estado	CEP	valorfrete_porPeso	peso	
 <?php
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../models/cidade.inc.php';
