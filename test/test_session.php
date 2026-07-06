@@ -61,7 +61,28 @@ $getFlash = function($chave) {
 assertTrue($getFlash('sucesso') === 'Cadastro realizado com sucesso!', 'getFlash() recupera a mensagem salva');
 assertTrue($getFlash('sucesso') === null, 'getFlash() remove a mensagem apos a primeira leitura (flash)');
 
-$venda = new VendaController();
+class MockBebidaDao {
+    private $bebidas = [];
+
+    public function __construct() {
+        $b1 = new Bebida();
+        $b1->id_bebida = 10;
+        $b1->setBebida('Bebida 10', '1L', 5.00, 1.0, 10, 'Fabricante A');
+        $this->bebidas[10] = $b1;
+
+        $b2 = new Bebida();
+        $b2->id_bebida = 20;
+        $b2->setBebida('Bebida 20', '2L', 10.00, 2.0, 20, 'Fabricante B');
+        $this->bebidas[20] = $b2;
+    }
+
+    public function buscarPorId($id) {
+        return isset($this->bebidas[$id]) ? $this->bebidas[$id] : null;
+    }
+}
+
+$mockBebidaDao = new MockBebidaDao();
+$venda = new VendaController($mockBebidaDao);
 
 $venda->limparCarrinho();
 assertTrue(count($venda->getCarrinho()) === 0, 'carrinho inicializado como vazio');
@@ -69,20 +90,39 @@ assertTrue(count($venda->getCarrinho()) === 0, 'carrinho inicializado como vazio
 $venda->adicionarAoCarrinho(10, 2);
 $venda->adicionarAoCarrinho(20, 1);
 $carrinho = $venda->getCarrinho();
-assertTrue(isset($carrinho[10]) && $carrinho[10] === 2, 'adicionarAoCarrinho() adiciona novos itens');
-assertTrue(isset($carrinho[20]) && $carrinho[20] === 1, 'adicionarAoCarrinho() aceita multiplos itens distintos');
+
+$getQuantidadeNoCarrinho = function($id, $carrinho) {
+    foreach ($carrinho as $item) {
+        if ($item->getBebida()->getId_bebida() === $id) {
+            return $item->getQuantidade();
+        }
+    }
+    return null;
+};
+
+$hasNoCarrinho = function($id, $carrinho) {
+    foreach ($carrinho as $item) {
+        if ($item->getBebida()->getId_bebida() === $id) {
+            return true;
+        }
+    }
+    return false;
+};
+
+assertTrue($getQuantidadeNoCarrinho(10, $carrinho) === 2, 'adicionarAoCarrinho() adiciona novos itens');
+assertTrue($getQuantidadeNoCarrinho(20, $carrinho) === 1, 'adicionarAoCarrinho() aceita multiplos itens distintos');
 
 $venda->adicionarAoCarrinho(10, 3);
 $carrinho = $venda->getCarrinho();
-assertTrue($carrinho[10] === 5, 'adicionarAoCarrinho() incrementa quantidade de itens existentes');
+assertTrue($getQuantidadeNoCarrinho(10, $carrinho) === 5, 'adicionarAoCarrinho() incrementa quantidade de itens existentes');
 
 $venda->atualizarCarrinho(20, 4);
 $carrinho = $venda->getCarrinho();
-assertTrue($carrinho[20] === 4, 'atualizarCarrinho() substitui a quantidade anterior');
+assertTrue($getQuantidadeNoCarrinho(20, $carrinho) === 4, 'atualizarCarrinho() substitui a quantidade anterior');
 
 $venda->removerDoCarrinho(10);
 $carrinho = $venda->getCarrinho();
-assertTrue(!isset($carrinho[10]), 'removerDoCarrinho() deleta o item selecionado');
+assertTrue(!$hasNoCarrinho(10, $carrinho), 'removerDoCarrinho() deleta o item selecionado');
 
 $venda->limparCarrinho();
 assertTrue(count($venda->getCarrinho()) === 0, 'limparCarrinho() esvazia totalmente o carrinho');

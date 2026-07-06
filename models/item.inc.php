@@ -29,9 +29,13 @@ class Item {
              return $this->quantidade;
       }
 
-      public function setQuantidade(){
-             $this->quantidade++;
-      }
+       public function setQuantidade($q = null){
+              if ($q !== null) {
+                     $this->quantidade = $q;
+              } else {
+                     $this->quantidade++;
+              }
+       }
 
        public function getBebida(){
              return $this->bebida;

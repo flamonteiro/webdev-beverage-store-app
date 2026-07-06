@@ -27,7 +27,14 @@ class CidadeController{
 
     public function excluir($id_cidade)
     {
-        return $this->cidadeDao->excluir($id_cidade);
+        try {
+            return $this->cidadeDao->excluir($id_cidade);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                return false;
+            }
+            throw $e;
+        }
     }
 
     public function listar()

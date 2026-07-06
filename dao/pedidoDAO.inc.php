@@ -27,22 +27,38 @@ class PedidoDao{
             $sql->bindValue(':val', $item->getValorItem());
             $sql->bindValue(':idCompra', $idCompra);
             $sql->execute();
+
+            // Reduz o estoque da bebida vendida
+            $sqlUpdate = $this->con->prepare("update bebidas set qde_estoque = qde_estoque - :q where id_bebida = :idBebida");
+            $sqlUpdate->bindValue(':q', $item->getQuantidade());
+            $sqlUpdate->bindValue(':idBebida', $item->getBebida()->getId_bebida());
+            $sqlUpdate->execute();
         }
     }
 
     public function incluirCompra(Pedido $pedido, $carrinho){
-        $sql = $this->con->prepare("insert into compras (id_cliente, data_compra, valor_total, valortotal_frete) values (:idCliente, :data, :valorTotal, :valorFrete)");
+        try {
+            $this->con->beginTransaction();
 
-        $sql->bindValue(':idCliente', $pedido->getId_cliente());
-        $sql->bindValue(':data', date('Y-m-d', $pedido->getDataCompra()));
-        $sql->bindValue(':valorTotal', $pedido->getValorTotal());
-        $sql->bindValue(':valorFrete', $pedido->getValortotalFrete());
-        $sql->execute();
+            $sql = $this->con->prepare("insert into compras (id_cliente, data_compra, valor_total, valortotal_frete) values (:idCliente, :data, :valorTotal, :valorFrete)");
 
-        $id = $this->getIdCompra();
-        $this->incluirItens($id, $carrinho);
+            $sql->bindValue(':idCliente', $pedido->getId_cliente());
+            $sql->bindValue(':data', date('Y-m-d', $pedido->getDataCompra()));
+            $sql->bindValue(':valorTotal', $pedido->getValorTotal());
+            $sql->bindValue(':valorFrete', $pedido->getValortotalFrete());
+            $sql->execute();
 
-        return $id;
+            $id = $this->getIdCompra();
+            $this->incluirItens($id, $carrinho);
+
+            $this->con->commit();
+            return $id;
+        } catch (Exception $e) {
+            if ($this->con->inTransaction()) {
+                $this->con->rollBack();
+            }
+            throw $e;
+        }
     }
 
     public function listar(){

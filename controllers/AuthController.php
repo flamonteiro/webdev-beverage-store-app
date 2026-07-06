@@ -49,7 +49,14 @@ class AuthController{
 
     public function excluir($id_cliente)
     {
-        return $this->getClienteDao()->excluir($id_cliente);
+        try {
+            return $this->getClienteDao()->excluir($id_cliente);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                return false;
+            }
+            throw $e;
+        }
     }
 
     public function listar()

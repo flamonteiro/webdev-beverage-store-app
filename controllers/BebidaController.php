@@ -27,7 +27,14 @@ class BebidaController{
 
     public function excluir($id_bebida)
     {
-        return $this->bebidaDao->excluir($id_bebida);
+        try {
+            return $this->bebidaDao->excluir($id_bebida);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                return false;
+            }
+            throw $e;
+        }
     }
 
     public function listar()
