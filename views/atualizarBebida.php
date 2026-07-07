@@ -53,12 +53,39 @@
   <div class="col-md-6">
     <label for="pImagem" class="form-label">Imagem</label>
     <div class="mb-2">
-      <img src="imagens/<?= $bebida->getImagem() ?>" alt="<?= $bebida->getNome() ?>" style="height: 60px; width: auto;" onerror="this.src='imagens/drinklogo.jpg'">
+      <img id="imgPreview" src="imagens/<?= $bebida->getImagem() ?>" alt="<?= $bebida->getNome() ?>" style="height: 60px; width: auto;" onerror="this.src='imagens/drinklogo.jpg'">
     </div>
-    <input type="file" class="form-control" name="pImagem" accept="image/png, image/jpeg, image/webp, image/avif, image/gif">
+    <input type="file" class="form-control" id="pImagem" name="pImagem" accept="image/png, image/jpeg, image/webp, image/avif, image/gif">
     <div class="form-text">Deixe em branco para manter a imagem atual.</div>
+    <button type="button" class="btn btn-outline-danger btn-sm mt-2 d-none" id="btnRemoverImagem">Remover imagem selecionada</button>
     <input type="hidden" name="pImagemAtual" value="<?= $bebida->getImagem() ?>">
   </div>
+
+  <script>
+    (function () {
+      var input = document.getElementById('pImagem');
+      var preview = document.getElementById('imgPreview');
+      var btnRemover = document.getElementById('btnRemoverImagem');
+      var imagemAtual = 'imagens/<?= addslashes($bebida->getImagem()) ?>';
+
+      input.addEventListener('change', function () {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+          };
+          reader.readAsDataURL(input.files[0]);
+          btnRemover.classList.remove('d-none');
+        }
+      });
+
+      btnRemover.addEventListener('click', function () {
+        input.value = '';
+        preview.src = imagemAtual;
+        btnRemover.classList.add('d-none');
+      });
+    })();
+  </script>
 
   <div class="col-12 text-center mt-4">
     <button type="submit" class="btn btn-success">Alterar</button>
