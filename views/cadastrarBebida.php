@@ -5,7 +5,7 @@
 <h1 class="text-center">Inclusão de Bebida</h1>
 <p>
 
-<form class="row g-3" action="../controllers/BebidaController.php" method="post">
+<form class="row g-3" action="../controllers/BebidaController.php" method="post" enctype="multipart/form-data">
   <div class="col-md-6">
     <label for="pNome" class="form-label">Nome</label>
     <input type="text" class="form-control" name="pNome" required>
@@ -37,8 +37,8 @@
   </div>
 
   <div class="col-md-6">
-    <label for="pImagem" class="form-label">Imagem (arquivo em views/imagens)</label>
-    <input type="text" class="form-control" name="pImagem" placeholder="Ex: heineken.jpg">
+    <label for="pImagem" class="form-label">Imagem</label>
+    <input type="file" class="form-control" name="pImagem" accept="image/png, image/jpeg, image/webp, image/avif, image/gif">
   </div>
 
   <div class="col-12 mt-4">

@@ -42,6 +42,33 @@ class BebidaController{
 
 }
 
+function uploadImagemBebida($default = 'drinklogo.jpg')
+{
+    if (!isset($_FILES['pImagem']) || $_FILES['pImagem']['error'] === UPLOAD_ERR_NO_FILE) {
+        return $default;
+    }
+
+    if ($_FILES['pImagem']['error'] !== UPLOAD_ERR_OK) {
+        return $default;
+    }
+
+    $extensoesPermitidas = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'gif'];
+    $extensao = strtolower(pathinfo($_FILES['pImagem']['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($extensao, $extensoesPermitidas) || getimagesize($_FILES['pImagem']['tmp_name']) === false) {
+        return $default;
+    }
+
+    $nomeArquivo = uniqid('bebida_') . '.' . $extensao;
+    $destino = __DIR__ . '/../views/imagens/' . $nomeArquivo;
+
+    if (!move_uploaded_file($_FILES['pImagem']['tmp_name'], $destino)) {
+        return $default;
+    }
+
+    return $nomeArquivo;
+}
+
 if (isset($_REQUEST['opcao'])) {
     session_start();
     $opcao = $_REQUEST['opcao'];
@@ -55,7 +82,7 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['pPeso'],
             $_REQUEST['pQdeEstoque'],
             $_REQUEST['pFabricante'],
-            $_REQUEST['pImagem'] ?? 'drinklogo.jpg'
+            uploadImagemBebida('drinklogo.jpg')
         );
         header("Location: BebidaController.php?opcao=2");
     } else if ($opcao == 2 || $opcao == 6) { // listar
@@ -81,7 +108,7 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['pPeso'],
             $_REQUEST['pQdeEstoque'],
             $_REQUEST['pFabricante'],
-            $_REQUEST['pImagem'] ?? 'drinklogo.jpg'
+            uploadImagemBebida($_REQUEST['pImagemAtual'] ?? 'drinklogo.jpg')
         );
         header("Location: BebidaController.php?opcao=2");
     }

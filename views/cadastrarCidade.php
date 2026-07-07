@@ -23,21 +23,16 @@
   </div>
 
   <div class="col-md-6">
-    <label for="cValorFrete" class="form-label">Valor do Frete (por Peso)</label>
+    <label for="cValorFrete" class="form-label">Valor do Frete</label>
     <input type="text" class="form-control" name="cValorFrete" required>
   </div>
 
-  <div class="col-md-6">
-    <label for="cPeso" class="form-label">Peso Limite/Base (kg)</label>
-    <input type="text" class="form-control" name="cPeso" required>
-  </div>
 
   <div class="col-12 mt-4">
     <button type="submit" class="btn btn-primary">Incluir</button>
     <button type="reset" class="btn btn-danger">Cancelar</button>
   </div>
   
-  <!-- ALTERAR VALUE CONFORME O CONTROLLER -->
   <input type="hidden" name="opcao" value="1">
 </form>
 

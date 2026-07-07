@@ -10,7 +10,7 @@
 <h1 class="text-center">Alteração de Bebida</h1>
 <p>
 
-<form class="row g-3" action="../controllers/BebidaController.php" method="post">
+<form class="row g-3" action="../controllers/BebidaController.php" method="post" enctype="multipart/form-data">
 
   <div class="col-md-2">
     <label for="pIdBebida" class="form-label">ID</label>
@@ -48,8 +48,13 @@
   </div>
 
   <div class="col-md-6">
-    <label for="pImagem" class="form-label">Imagem (arquivo em views/imagens)</label>
-    <input type="text" class="form-control" name="pImagem" value="<?= $bebida->getImagem() ?>" placeholder="Ex: heineken.jpg">
+    <label for="pImagem" class="form-label">Imagem</label>
+    <div class="mb-2">
+      <img src="imagens/<?= $bebida->getImagem() ?>" alt="<?= $bebida->getNome() ?>" style="height: 60px; width: auto;" onerror="this.src='imagens/drinklogo.jpg'">
+    </div>
+    <input type="file" class="form-control" name="pImagem" accept="image/png, image/jpeg, image/webp, image/avif, image/gif">
+    <div class="form-text">Deixe em branco para manter a imagem atual.</div>
+    <input type="hidden" name="pImagemAtual" value="<?= $bebida->getImagem() ?>">
   </div>
 
   <div class="col-12 text-center mt-4">
