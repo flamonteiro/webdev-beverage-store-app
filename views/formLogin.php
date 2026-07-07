@@ -1,7 +1,16 @@
-<?php require_once 'includes/cabecalho.inc.php'; ?>
+<?php
+require_once 'includes/cabecalho.inc.php';
+
+$erro = $_SESSION['erroLogin'] ?? null;
+unset($_SESSION['erroLogin']);
+?>
 
 <!-- CONTEUDO -->
 <h1 class="text-center">Login de Usuário</h1>
+
+<?php if ($erro) { ?>
+  <div class="alert alert-danger text-center" role="alert"><?= htmlspecialchars($erro) ?></div>
+<?php } ?>
 
 <div class="row">
     <div class="col-lg-10 col-xl-9 mx-auto">

@@ -73,6 +73,7 @@ if (isset($_REQUEST['pOpcao'])) {
                 header("Location: ../views/showroomBebidas.php");
             }
         } else {
+            $_SESSION['erroLogin'] = 'Email ou senha invalidos.';
             header("Location: ../views/formLogin.php?erro=1");
         }
     } else if ($pOpcao == 2) { // logout
