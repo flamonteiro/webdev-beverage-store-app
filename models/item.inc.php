@@ -21,6 +21,10 @@ class Item {
              return $this->valorItem;
       }
 
+      public function getPesoItem(){
+             return $this->quantidade * $this->bebida->getPeso();
+      }
+
       public function setValorItem(){
               $this->valorItem = $this->quantidade * $this->bebida->getPreco();
       }

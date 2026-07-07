@@ -23,14 +23,16 @@ function exigirAdmin()
 function calcularTotaisCarrinho()
 {
     $total = 0;
+    $pesoTotal = 0;
     foreach ($_SESSION['carrinho'] ?? [] as $item) {
         $total += $item->getValorItem();
+        $pesoTotal += $item->getPesoItem();
     }
     $_SESSION['total'] = $total;
 
     $cidadeDao = new CidadeDao();
     $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
-    $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $total;
+    $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $pesoTotal;
 }
 
 ?>
