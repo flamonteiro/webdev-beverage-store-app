@@ -5,7 +5,7 @@
 <h1 class="text-center">Cadastro de Cidade</h1>
 <p> 
   
-<form class="row g-3" action="../controlers/controlerCidade.php" method="post">
+<form class="row g-3" action="../controllers/CidadeController.php" method="post">
   
   <div class="col-md-6">
     <label for="cCidade" class="form-label">Cidade</label>

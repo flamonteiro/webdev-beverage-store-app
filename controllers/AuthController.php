@@ -55,4 +55,29 @@ class AuthController{
 
 }
 
+if (isset($_REQUEST['pOpcao'])) {
+    session_start();
+    $pOpcao = $_REQUEST['pOpcao'];
+
+    if ($pOpcao == 1) { // autenticar
+        $controller = new AuthController();
+        $cliente = $controller->autenticar($_REQUEST['pEmail'], $_REQUEST['pSenha']);
+
+        if ($cliente != null) {
+            $_SESSION['cliente'] = $cliente;
+
+            if (isset($_SESSION['carrinho'])) {
+                header("Location: ../views/dadosCompra.php");
+            } else {
+                header("Location: ../views/showroomBebidas.php");
+            }
+        } else {
+            header("Location: ../views/formLogin.php?erro=1");
+        }
+    } else if ($pOpcao == 2) { // logout
+        session_destroy();
+        header("Location: ../views/index.php");
+    }
+}
+
 ?>

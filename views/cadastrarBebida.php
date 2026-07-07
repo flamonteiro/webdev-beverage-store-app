@@ -1,12 +1,11 @@
 <?php
     require_once "includes/cabecalho.inc.php";
-    $fabricantes = $_SESSION['fabricantes'];    
 ?>
 <p>
 <h1 class="text-center">Inclusão de Bebida</h1>
-<p> 
-  
-<form class="row g-3" action="../controlers/controlerProduto.php" method="post">
+<p>
+
+<form class="row g-3" action="../controllers/BebidaController.php" method="post">
   <div class="col-md-6">
     <label for="pNome" class="form-label">Nome</label>
     <input type="text" class="form-control" name="pNome" required>

@@ -1,5 +1,5 @@
 <?php        
-      require_once '../classes/bebida.inc.php';
+      require_once '../models/bebida.inc.php';
       require_once 'includes/cabecalho.inc.php';
 
       $bebidas = $_SESSION['bebidas'];
@@ -24,16 +24,16 @@
     <tbody class="table-group-divider">
       <?php foreach($bebidas as $bebida) { ?>
         <tr>
-          <td><?= $bebida->getIdBebida() ?></td>
+          <td><?= $bebida->getId_bebida() ?></td>
           <td><strong><?= $bebida->getNome() ?></strong></td>
           <td><?= $bebida->getVolume() ?></td>
           <td><?= $bebida->getPeso() ?> kg</td>
           <td>R$ <?= number_format($bebida->getPreco(), 2, ',', '.') ?></td>
-          <td><?= $bebida->getQdeEstoque() ?></td>
+          <td><?= $bebida->getQde_estoque() ?></td>
           <td><?= $bebida->getFabricante() ?></td>
           <td>
-            <a href='../controlers/inserirController.php?opcao=4&id=<?= $bebida->getIdBebida() ?>' class='btn btn-success btn-sm' title="Alterar">A</a>
-            <a href='../controlers/inserirController.php?opcao=3&id=<?= $bebida->getIdBebida() ?>' class='btn btn-danger btn-sm' title="Excluir">X</a>
+            <a href='../controllers/BebidaController.php?opcao=4&id=<?= $bebida->getId_bebida() ?>' class='btn btn-success btn-sm' title="Alterar">A</a>
+            <a href='../controllers/BebidaController.php?opcao=3&id=<?= $bebida->getId_bebida() ?>' class='btn btn-danger btn-sm' title="Excluir">X</a>
           </td>
         </tr>
       <?php } ?>

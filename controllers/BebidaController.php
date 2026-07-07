@@ -42,4 +42,47 @@ class BebidaController{
 
 }
 
+if (isset($_REQUEST['opcao'])) {
+    session_start();
+    $opcao = $_REQUEST['opcao'];
+    $controller = new BebidaController();
+
+    if ($opcao == 1) { // cadastrar
+        $controller->cadastrar(
+            $_REQUEST['pNome'],
+            $_REQUEST['pVolume'],
+            $_REQUEST['pPreco'],
+            $_REQUEST['pPeso'],
+            $_REQUEST['pQdeEstoque'],
+            $_REQUEST['pFabricante']
+        );
+        header("Location: BebidaController.php?opcao=2");
+    } else if ($opcao == 2 || $opcao == 6) { // listar
+        $_SESSION['bebidas'] = $controller->listar();
+
+        if ($opcao == 2) {
+            header("Location: ../views/exibirBebidas.php");
+        } else {
+            header("Location: ../views/showroomBebidas.php");
+        }
+    } else if ($opcao == 3) { // excluir
+        $controller->excluir((int) $_REQUEST['id']);
+        header("Location: BebidaController.php?opcao=2");
+    } else if ($opcao == 4) { // buscar para alterar
+        $_SESSION['bebida'] = $controller->buscarPorId((int) $_REQUEST['id']);
+        header("Location: ../views/atualizarBebida.php");
+    } else if ($opcao == 5) { // alterar
+        $controller->alterar(
+            (int) $_REQUEST['pIdBebida'],
+            $_REQUEST['pNome'],
+            $_REQUEST['pVolume'],
+            $_REQUEST['pPreco'],
+            $_REQUEST['pPeso'],
+            $_REQUEST['pQdeEstoque'],
+            $_REQUEST['pFabricante']
+        );
+        header("Location: BebidaController.php?opcao=2");
+    }
+}
+
 ?>
