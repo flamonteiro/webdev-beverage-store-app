@@ -78,10 +78,9 @@ if (isset($_REQUEST['pOpcao'])) {
     } else if ($pOpcao == 2) { // logout
         session_destroy();
         header("Location: ../views/index.php");
-    } else if ($pOpcao == 3) { // cadastrar novo cliente - restrito ao administrador
-        exigirAdmin();
-
+    } else if ($pOpcao == 3) { // cadastrar novo cliente - publico, sempre como usuario comum (tipo 'C')
         $controller = new AuthController();
+        $cadastradoPeloAdmin = isset($_SESSION['cliente']) && $_SESSION['cliente']->tipo === 'A';
 
         try {
             if ($_REQUEST['pSenha'] !== $_REQUEST['pSenhaConfirma']) {
@@ -101,7 +100,19 @@ if (isset($_REQUEST['pOpcao'])) {
                 throw new InvalidArgumentException('Este email ja esta cadastrado.');
             }
 
-            header("Location: ../views/cadastrarCliente.php?sucesso=1");
+            if ($cadastradoPeloAdmin) {
+                // admin cadastrando um cliente pelo painel: mantem a sessao do admin
+                header("Location: ../views/cadastrarCliente.php?sucesso=1");
+            } else {
+                // visitante se autocadastrando: loga automaticamente como o novo cliente
+                $_SESSION['cliente'] = $controller->autenticar($_REQUEST['pEmail'], $_REQUEST['pSenha']);
+
+                if (isset($_SESSION['carrinho'])) {
+                    header("Location: ../views/dadosCompra.php");
+                } else {
+                    header("Location: ../views/showroomBebidas.php");
+                }
+            }
         } catch (InvalidArgumentException $e) {
             $_SESSION['erroCadastro'] = $e->getMessage();
             header("Location: ../views/cadastrarCliente.php?erro=1");

@@ -1,9 +1,6 @@
 <?php
     require_once '../dao/cidadeDAO.inc.php';
-    require_once '../helpers/session.php';
     require_once 'includes/cabecalho.inc.php';
-
-    exigirAdmin(); // cadastro de clientes e restrito ao administrador
 
     $cidadeDao = new CidadeDao();
     $cidades = $cidadeDao->listar();

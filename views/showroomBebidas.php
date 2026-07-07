@@ -1,8 +1,9 @@
 
 <?php
   include_once '../models/bebida.inc.php';
+  require_once '../dao/bebidaDAO.inc.php';
   include_once 'includes/cabecalho.inc.php';
-  $bebidas = $_SESSION['bebidas'];
+  $bebidas = (new BebidaDao())->listar();
 ?>
 <style>
   .produto-card {

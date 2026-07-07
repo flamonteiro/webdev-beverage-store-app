@@ -29,6 +29,11 @@
 
                     <input type="hidden" value="1" name="pOpcao">
                 </form>
+
+                <p class="text-center mt-4 mb-0">
+                    Ainda não tem uma conta?
+                    <a href="cadastrarCliente.php">Cadastre-se</a>
+                </p>
             </div>
         </div>
     </div>
