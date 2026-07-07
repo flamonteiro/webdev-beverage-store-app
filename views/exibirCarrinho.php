@@ -1,5 +1,5 @@
 <?php
-      require_once '../classes/item.inc.php';
+      require_once '../models/item.inc.php';
       require_once 'includes/cabecalho.inc.php';
 ?>
 
@@ -26,7 +26,7 @@
         <th>Fabricante</th>
         <th>Preço Unitário</th>
         <th>Quantidade</th>
-        <th>Total Item</th>                
+        <th>Total Item</th>
         <th style="width: 10%;">Remover</th>
       </tr>
     </thead>
@@ -43,15 +43,15 @@
           <td>R$ <?= number_format($item->getValorItem(), 2, ',', '.') ?></td>
           <td>
             <a href="../controllers/inserirController.php?opcao=2&index=<?= $cont - 1 ?>" class='btn btn-danger btn-sm' title="Remover item">X</a>
-          </td>   
+          </td>
         </tr>
 
-      <?php 
+      <?php
           $cont++;
           $soma += $item->getValorItem();
-        } 
+        }
       ?>
-         
+
       <tr>
         <td colspan="9" class="text-end pe-4">
           <span class="fs-4 text-danger fw-bold">
@@ -60,7 +60,7 @@
         </td>
       </tr>
     </tbody>
-  </table> 
+  </table>
 </div>
 
 <div class="container text-center my-5">
