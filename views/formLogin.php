@@ -1,3 +1,5 @@
+<?php require_once 'includes/cabecalho.inc.php'; ?>
+
 <!-- CONTEUDO -->
 <h1 class="text-center">Login de Usuário</h1>
 
@@ -34,3 +36,4 @@
 </div>
 
 <!-- Rodape -->
+<?php require_once 'includes/rodape.inc.php'; ?>
