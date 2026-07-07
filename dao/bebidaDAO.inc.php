@@ -46,6 +46,14 @@ class BebidaDao{
         return $sql->execute();
     }
 
+    public function baixarEstoque($id_bebida, $quantidade){
+        $sql = $this->con->prepare("update bebidas set qde_estoque = qde_estoque - :quantidade where id_bebida = :id");
+        $sql->bindValue(':quantidade', $quantidade);
+        $sql->bindValue(':id', $id_bebida);
+
+        return $sql->execute();
+    }
+
     public function listar(){
         $sql = $this->con->query("select * from bebidas order by nome");
         $bebidas = array();

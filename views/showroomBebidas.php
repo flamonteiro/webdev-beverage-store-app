@@ -27,6 +27,12 @@
 <h1 class="text-center">Show room de bebidas</h1>
 <p>
 
+<?php if(isset($_GET['semestoque'])) { ?>
+  <div class="alert alert-warning text-center" role="alert">
+    Quantidade solicitada indisponível em estoque para essa bebida.
+  </div>
+<?php } ?>
+
 <div class="row row-cols-1 row-cols-md-5 g-4">
 
 <?php
@@ -41,7 +47,18 @@
         <p class="card-text"><?= $bebida->getVolume() ?></p>
         <span class="badge bg-light text-secondary align-self-end fabricante-badge"><?= $bebida->getFabricante() ?></span>
         <h4 class="card-title text-danger fw-bold mt-2">R$<?= number_format($bebida->getPreco(), 2, ',', '.') ?></h4>
-        <div class="text-end mt-auto"><?php echo "<a href='../controllers/CarrinhoController.php?opcao=1&id=".$bebida->getId_bebida()."' class='btn btn-danger'>Comprar</a>" ?></div>
+        <div class="mt-auto">
+        <?php if($bebida->getQde_estoque() > 0) { ?>
+          <form action="../controllers/CarrinhoController.php" method="get" class="d-flex gap-2">
+            <input type="hidden" name="opcao" value="1">
+            <input type="hidden" name="id" value="<?= $bebida->getId_bebida() ?>">
+            <input type="number" name="quantidade" value="1" min="1" max="<?= $bebida->getQde_estoque() ?>" class="form-control form-control-sm" style="width: 70px;">
+            <button type="submit" class="btn btn-danger btn-sm flex-fill">Comprar</button>
+          </form>
+        <?php } else { ?>
+          <button type="button" class="btn btn-secondary btn-sm w-100" disabled>Sem estoque</button>
+        <?php } ?>
+        </div>
       </div>
     </div>
 </div>

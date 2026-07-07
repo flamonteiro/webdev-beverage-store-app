@@ -1,5 +1,6 @@
 <?php
    class Pedido {
+       private $id_compra;
        private $id_cliente;
        private $valor_total;
        private $valortotal_frete;
@@ -20,6 +21,14 @@
               $this->valor_total = $valor_total;
               $this->valortotal_frete = $valortotal_frete;
               $this->data_compra = time();
+      }
+
+      public function getIdCompra(){
+             return $this->id_compra;
+      }
+
+      public function setIdCompra($id_compra){
+              $this->id_compra = $id_compra;
       }
 
       public function getId_cliente(){

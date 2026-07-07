@@ -35,7 +35,7 @@
         Vendas
       </a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="exibirHistorico.php">Histórico de Vendas</a></li>
+        <li><a class="dropdown-item" href="../controllers/PedidoController.php?opcao=2">Histórico de Vendas</a></li>
       </ul>
     </li>
     <li><a href="exibirDashboard.php" class="nav-link px-2 link-dark">Dashboard</a></li>

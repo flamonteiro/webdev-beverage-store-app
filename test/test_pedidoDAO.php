@@ -48,15 +48,16 @@ assertTrue($id_compra !== null, 'incluirCompra() retorna o id da compra gerada')
 // buscarPorId
 $compra = $pedidoDao->buscarPorId($id_compra);
 assertTrue($compra !== null, 'buscarPorId() encontra a compra cadastrada');
-assertTrue((int)$compra->id_cliente === (int)$id_cliente, 'buscarPorId() traz o id_cliente correto');
-assertTrue((float)$compra->valor_total === (float)$item->getValorItem(), 'buscarPorId() traz o valor_total correto');
+assertTrue($compra instanceof Pedido, 'buscarPorId() retorna um objeto Pedido');
+assertTrue((int)$compra->getId_cliente() === (int)$id_cliente, 'buscarPorId() traz o id_cliente correto');
+assertTrue((float)$compra->getValorTotal() === (float)$item->getValorItem(), 'buscarPorId() traz o valor_total correto');
 assertTrue($pedidoDao->buscarPorId(999999) === null, 'buscarPorId() retorna null para id inexistente');
 
 // listar
 $compras = $pedidoDao->listar();
 $encontrada = null;
 foreach($compras as $c){
-    if((int)$c->id_compra === (int)$id_compra){
+    if((int)$c->getIdCompra() === (int)$id_compra){
         $encontrada = $c;
     }
 }

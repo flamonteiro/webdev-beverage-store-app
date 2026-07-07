@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../dao/pedidoDAO.inc.php';
+require_once __DIR__ . '/../dao/bebidaDAO.inc.php';
 require_once __DIR__ . '/../models/pedido.inc.php';
 
 class PedidoController{
@@ -31,6 +32,37 @@ class PedidoController{
         return $this->pedidoDao->listarItens($id_compra);
     }
 
+}
+
+if (isset($_REQUEST['opcao'])) {
+    session_start();
+    $opcao = $_REQUEST['opcao'];
+
+    if ($opcao == 1) { // finalizar compra
+        $cliente = $_SESSION['cliente'];
+        $carrinho = $_SESSION['carrinho'];
+        $valorTotal = $_SESSION['total'];
+        $valorFrete = $_SESSION['frete'];
+
+        $controller = new PedidoController();
+        $controller->finalizarCompra($cliente->id_cliente, $valorTotal, $valorFrete, $carrinho);
+
+        $bebidaDao = new BebidaDao();
+        foreach ($carrinho as $item) {
+            $bebidaDao->baixarEstoque($item->getBebida()->getId_bebida(), $item->getQuantidade());
+        }
+
+        unset($_SESSION['carrinho']);
+        unset($_SESSION['total']);
+        unset($_SESSION['frete']);
+
+        header("Location: ../views/boleto/meuBoleto.php?metodo=" . urlencode($_REQUEST['pag'] ?? 'cartao'));
+    } else if ($opcao == 2) { // listar historico de vendas
+        $controller = new PedidoController();
+        $_SESSION['compras'] = $controller->listar();
+
+        header("Location: ../views/exibirHistorico.php");
+    }
 }
 
 ?>
