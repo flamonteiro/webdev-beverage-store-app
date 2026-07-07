@@ -73,8 +73,8 @@ CREATE TABLE `cidades` (
 --
 
 INSERT INTO `cidades` (`id_cidade`, `cidade`, `estado`, `CEP`, `valorfrete_porPeso`, `peso`) VALUES
-(1, 'Alegre', 'ES', '29500-000', 0.05, 10),
-(2, 'Vitoria', 'ES', '29010-000', 0.18, 8);
+(1, 'Alegre', 'ES', '29500-000', 0.05, 100),
+(2, 'Vitoria', 'ES', '29010-000', 0.18, 80);
 
 -- --------------------------------------------------------
 
