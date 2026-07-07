@@ -40,11 +40,7 @@
     </li>
     <li><a href="exibirDashboard.php" class="nav-link px-2 link-dark">Dashboard</a></li>
 
-    <li>
-      <a class="nav-link px-2 link-dark" href="exibirCarrinho.php">
-        <img src="imagens/cart3.png" alt="Carrinho">
-      </a>
-    </li>
+    <li><a href="exibirCarrinho.php" class="nav-link px-2 link-dark">Carrinho</a></li>
 
   </ul>
 
