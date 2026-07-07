@@ -12,7 +12,7 @@
 
     <li><a href="meusDados.php" class="nav-link px-2 link-dark">Seus dados</a></li>
 
-    <li><a href="#" class="nav-link px-2 link-dark">Contato</a></li>
+    <li><a href="contato.php" class="nav-link px-2 link-dark">Contato</a></li>
 
     <li><a href="exibirCarrinho.php" class="nav-link px-2 link-dark">Carrinho</a></li>
 
