@@ -41,6 +41,13 @@ if (isset($_REQUEST['opcao'])) {
 
     if ($opcao == 1) { // finalizar compra
         exigirLogin();
+        calcularTotaisCarrinho();
+
+        if ($_SESSION['excedeLimitePeso']) {
+            $_SESSION['erroCompra'] = 'O peso total do pedido excede o limite de entrega para sua cidade.';
+            header("Location: ../views/dadosCompra.php");
+            exit;
+        }
 
         $cliente = $_SESSION['cliente'];
         $carrinho = $_SESSION['carrinho'];

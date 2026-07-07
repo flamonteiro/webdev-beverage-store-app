@@ -29,10 +29,13 @@ function calcularTotaisCarrinho()
         $pesoTotal += $item->getPesoItem();
     }
     $_SESSION['total'] = $total;
+    $_SESSION['pesoTotal'] = $pesoTotal;
 
     $cidadeDao = new CidadeDao();
     $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
     $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $pesoTotal;
+    $_SESSION['pesoLimiteCidade'] = $cidade->getPeso();
+    $_SESSION['excedeLimitePeso'] = $pesoTotal > $cidade->getPeso();
 }
 
 ?>

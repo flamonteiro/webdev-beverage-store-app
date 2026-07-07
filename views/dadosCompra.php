@@ -11,6 +11,8 @@
       $cliente = $_SESSION['cliente'];
       $total = $_SESSION['total'];
       $frete = $_SESSION['frete'];
+      $pesoTotal = $_SESSION['pesoTotal'];
+      $excedeLimitePeso = $_SESSION['excedeLimitePeso'];
       $cidade = (new CidadeDao())->buscarPorId($cliente->id_cidade);
 ?>
 
@@ -76,13 +78,27 @@
   </table>
 </div>
 
+<?php if($excedeLimitePeso){ ?>
+  <div class="alert alert-danger text-center" role="alert">
+    O peso total do pedido (<?= number_format($pesoTotal, 2, ',', '.') ?> kg) excede o limite de entrega
+    para <?= $cidade->getCidade() ?> (<?= number_format($cidade->getPeso(), 2, ',', '.') ?> kg).
+    Remova alguns itens do carrinho para continuar.
+  </div>
+<?php } ?>
+
 <div class="container text-center my-5">
   <div class="row">
     <div class="col">
-      <a class="btn btn-success btn-lg" role="button" href="dadosPagamento.php">
-        <b>Efetuar o Pagamento</b>
-      </a>
-    </div>                 
+      <?php if($excedeLimitePeso){ ?>
+        <button class="btn btn-success btn-lg" type="button" disabled>
+          <b>Efetuar o Pagamento</b>
+        </button>
+      <?php } else { ?>
+        <a class="btn btn-success btn-lg" role="button" href="dadosPagamento.php">
+          <b>Efetuar o Pagamento</b>
+        </a>
+      <?php } ?>
+    </div>
   </div>
 </div>
 
