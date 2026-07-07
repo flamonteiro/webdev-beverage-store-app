@@ -16,11 +16,15 @@
                if(trim($cidade) === ''){
                    throw new InvalidArgumentException('Nome da cidade nao pode ser vazio.');
                }
-               if(!preg_match('/^[A-Za-z]{2}$/', $estado)){
-                   throw new InvalidArgumentException('Estado deve ter exatamente 2 letras (UF).');
+               $ufsValidas = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+               if(!in_array(strtoupper($estado), $ufsValidas)){
+                   throw new InvalidArgumentException('Estado deve ser uma UF valida (ex: SP, RJ, ES).');
                }
                if(trim($CEP) === ''){
                    throw new InvalidArgumentException('CEP nao pode ser vazio.');
+               }
+               if(!preg_match('/^\d{5}-?\d{3}$/', $CEP)){
+                   throw new InvalidArgumentException('CEP deve estar no formato 00000-000 ou 00000000.');
                }
                if(!is_numeric($valorfrete_porPeso) || $valorfrete_porPeso < 0){
                    throw new InvalidArgumentException('Valor do frete por peso nao pode ser negativo.');

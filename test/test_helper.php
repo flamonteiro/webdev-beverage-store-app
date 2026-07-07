@@ -12,6 +12,15 @@ function assertTrue($condicao, $descricao){
     }
 }
 
+function assertThrows(callable $callback, $exceptionClass, $descricao){
+    try {
+        $callback();
+        assertTrue(false, $descricao);
+    } catch (\Throwable $e) {
+        assertTrue($e instanceof $exceptionClass, $descricao);
+    }
+}
+
 function resumoTestes(){
     $ok = $GLOBALS['__testes_ok'];
     $falha = $GLOBALS['__testes_falha'];

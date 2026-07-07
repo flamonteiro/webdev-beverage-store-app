@@ -62,4 +62,13 @@ $dao->excluir($id);
 $row3 = buscarCidade($con, $id);
 assertTrue($row3 === false, 'excluir() remove a cidade');
 
+// validacoes do model (nao usa banco)
+assertThrows(function(){
+    (new Cidade())->setCidade('Vitoria Teste', 'XX', '29000-000', 0.05, 0.0);
+}, InvalidArgumentException::class, 'setCidade() rejeita UF invalida');
+
+assertThrows(function(){
+    (new Cidade())->setCidade('Vitoria Teste', 'ES', '123', 0.05, 0.0);
+}, InvalidArgumentException::class, 'setCidade() rejeita CEP fora do formato');
+
 resumoTestes();

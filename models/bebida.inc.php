@@ -21,6 +21,9 @@
                if(trim($volume) === ''){
                    throw new InvalidArgumentException('Volume da bebida nao pode ser vazio.');
                }
+               if(!preg_match('/^\d+([.,]\d+)?\s?(ml|L)$/i', $volume)){
+                   throw new InvalidArgumentException('Volume deve estar no formato numero + unidade (ex: 350ml ou 2L).');
+               }
                if(!is_numeric($preco) || $preco <= 0){
                    throw new InvalidArgumentException('Preco deve ser um numero maior que zero.');
                }
@@ -29,6 +32,9 @@
                }
                if(!is_numeric($qde_estoque) || $qde_estoque < 0){
                    throw new InvalidArgumentException('Quantidade em estoque nao pode ser negativa.');
+               }
+               if(fmod((float)$qde_estoque, 1.0) !== 0.0){
+                   throw new InvalidArgumentException('Quantidade em estoque deve ser um numero inteiro.');
                }
                if(trim($fabricante) === ''){
                    throw new InvalidArgumentException('Fabricante nao pode ser vazio.');

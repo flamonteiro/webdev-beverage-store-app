@@ -87,4 +87,9 @@ assertTrue($row3 === false, 'excluir() remove o cliente');
 // limpeza da cidade usada no teste
 $cidadeDao->excluir($id_cidade);
 
+// validacoes do model (nao usa banco)
+assertThrows(function() use ($id_cidade){
+    (new Cliente())->setCliente('Cliente Teste', '123', 'Rua Teste, 123', $id_cidade, 'teste@email.com', 'Senha123');
+}, InvalidArgumentException::class, 'setCliente() rejeita CNPJ fora do formato');
+
 resumoTestes();

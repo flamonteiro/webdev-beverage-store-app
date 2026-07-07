@@ -62,4 +62,17 @@ $dao->excluir($id);
 $row3 = buscarBebida($con, $id);
 assertTrue($row3 === false, 'excluir() remove a bebida');
 
+// validacoes do model (nao usa banco)
+assertThrows(function(){
+    (new Bebida())->setBebida('Cerveja Teste', '350', 5.50, 0.35, 100, 'Fabricante Teste');
+}, InvalidArgumentException::class, 'setBebida() rejeita volume sem unidade');
+
+assertThrows(function(){
+    (new Bebida())->setBebida('Cerveja Teste', 'abc', 5.50, 0.35, 100, 'Fabricante Teste');
+}, InvalidArgumentException::class, 'setBebida() rejeita volume nao numerico');
+
+assertThrows(function(){
+    (new Bebida())->setBebida('Cerveja Teste', '350ml', 5.50, 0.35, 10.5, 'Fabricante Teste');
+}, InvalidArgumentException::class, 'setBebida() rejeita estoque nao inteiro');
+
 resumoTestes();

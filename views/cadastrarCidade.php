@@ -22,7 +22,7 @@
 
   <div class="col-md-4">
     <label for="cCEP" class="form-label">CEP</label>
-    <input type="text" class="form-control" name="cCEP" placeholder="00000-000" required maxLength="9">
+    <input type="text" class="form-control" name="cCEP" placeholder="00000-000" required maxLength="9" pattern="\d{5}-?\d{3}" title="CEP deve estar no formato 00000-000 ou 00000000">
   </div>
 
   <div class="col-md-6">

@@ -20,6 +20,9 @@
                if(trim($cnpj) === ''){
                    throw new InvalidArgumentException('CNPJ nao pode ser vazio.');
                }
+               if(!preg_match('/^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}$/', $cnpj)){
+                   throw new InvalidArgumentException('CNPJ deve estar no formato 00.000.000/0000-00 ou 14 digitos.');
+               }
                if(trim($endereco) === ''){
                    throw new InvalidArgumentException('Endereco nao pode ser vazio.');
                }
