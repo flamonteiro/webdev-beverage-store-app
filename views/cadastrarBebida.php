@@ -1,5 +1,8 @@
 <?php
+    require_once "../helpers/session.php";
     require_once "includes/cabecalho.inc.php";
+
+    exigirAdmin();
 ?>
 <p>
 <h1 class="text-center">Inclusão de Bebida</h1>

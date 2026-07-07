@@ -1,7 +1,10 @@
 <?php
       require_once '../controllers/PedidoController.php';
       require_once '../dao/bebidaDAO.inc.php';
+      require_once '../helpers/session.php';
       require_once "includes/cabecalho.inc.php";
+
+      exigirAdmin();
 
       $id_compra = (int) $_GET['id'];
 

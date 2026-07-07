@@ -1,6 +1,9 @@
 <?php        
       require_once '../models/cidade.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
+
+      exigirAdmin();
 
       // Carrega a lista de cidades
       $cidades = $_SESSION['cidades'];

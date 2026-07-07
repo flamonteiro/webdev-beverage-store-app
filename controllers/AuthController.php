@@ -77,6 +77,69 @@ if (isset($_REQUEST['pOpcao'])) {
     } else if ($pOpcao == 2) { // logout
         session_destroy();
         header("Location: ../views/index.php");
+    } else if ($pOpcao == 3) { // cadastrar novo cliente
+        $controller = new AuthController();
+
+        try {
+            if ($_REQUEST['pSenha'] !== $_REQUEST['pSenhaConfirma']) {
+                throw new InvalidArgumentException('As senhas nao coincidem.');
+            }
+
+            $sucesso = $controller->cadastrar(
+                $_REQUEST['pNome'],
+                $_REQUEST['pCnpj'],
+                $_REQUEST['pEndereco'],
+                (int) $_REQUEST['pIdCidade'],
+                $_REQUEST['pEmail'],
+                $_REQUEST['pSenha']
+            );
+
+            if (!$sucesso) {
+                throw new InvalidArgumentException('Este email ja esta cadastrado.');
+            }
+
+            $_SESSION['cliente'] = $controller->autenticar($_REQUEST['pEmail'], $_REQUEST['pSenha']);
+
+            if (isset($_SESSION['carrinho'])) {
+                header("Location: ../views/dadosCompra.php");
+            } else {
+                header("Location: ../views/showroomBebidas.php");
+            }
+        } catch (InvalidArgumentException $e) {
+            $_SESSION['erroCadastro'] = $e->getMessage();
+            header("Location: ../views/cadastrarCliente.php?erro=1");
+        }
+    } else if ($pOpcao == 4) { // alterar dados do cliente logado
+        if (!isset($_SESSION['cliente'])) {
+            header("Location: ../views/formLogin.php");
+            exit;
+        }
+
+        $controller = new AuthController();
+        $idCliente = $_SESSION['cliente']->id_cliente;
+        $senha = trim($_REQUEST['pSenha']) !== '' ? $_REQUEST['pSenha'] : $_SESSION['cliente']->senha;
+
+        try {
+            $sucesso = $controller->alterar(
+                $idCliente,
+                $_REQUEST['pNome'],
+                $_REQUEST['pCnpj'],
+                $_REQUEST['pEndereco'],
+                (int) $_REQUEST['pIdCidade'],
+                $_REQUEST['pEmail'],
+                $senha
+            );
+
+            if (!$sucesso) {
+                throw new InvalidArgumentException('Este email ja esta em uso por outro cliente.');
+            }
+
+            $_SESSION['cliente'] = $controller->autenticar($_REQUEST['pEmail'], $senha);
+            header("Location: ../views/meusDados.php?sucesso=1");
+        } catch (InvalidArgumentException $e) {
+            $_SESSION['erroCadastro'] = $e->getMessage();
+            header("Location: ../views/meusDados.php?erro=1");
+        }
     }
 }
 

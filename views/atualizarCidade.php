@@ -1,7 +1,10 @@
 
 <?php
     require_once '../models/cidade.inc.php';
+    require_once '../helpers/session.php';
     require_once 'includes/cabecalho.inc.php';
+
+    exigirAdmin();
 
     $cidade = $_SESSION['cidade'];
 ?>

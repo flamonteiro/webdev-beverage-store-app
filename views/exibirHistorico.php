@@ -1,6 +1,9 @@
 <?php
       require_once '../models/pedido.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
+
+      exigirAdmin();
 
       // Recupera o histórico de compras/vendas da sessão
       $compras = isset($_SESSION['compras']) ? $_SESSION['compras'] : [];

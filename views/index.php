@@ -1,6 +1,12 @@
 <?php require_once "includes/cabecalho.inc.php" ?>
 
 <!-- CONTEUDO -->
+<?php if (isset($_GET['acessoNegado'])) { ?>
+  <div class="alert alert-danger text-center mt-3" role="alert">
+    Acesso restrito ao administrador do sistema.
+  </div>
+<?php } ?>
+
 <h1 class="text-center">Bem-vindos à nossa distribuidora!</h1>
 
 <section class="my-5">

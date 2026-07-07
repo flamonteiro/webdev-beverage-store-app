@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../dao/pedidoDAO.inc.php';
 require_once __DIR__ . '/../dao/bebidaDAO.inc.php';
 require_once __DIR__ . '/../models/pedido.inc.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 class PedidoController{
     private $pedidoDao;
@@ -57,7 +58,9 @@ if (isset($_REQUEST['opcao'])) {
         unset($_SESSION['frete']);
 
         header("Location: ../views/boleto/meuBoleto.php?metodo=" . urlencode($_REQUEST['pag'] ?? 'cartao'));
-    } else if ($opcao == 2) { // listar historico de vendas
+    } else if ($opcao == 2) { // listar historico de vendas - restrito ao administrador
+        exigirAdmin();
+
         $controller = new PedidoController();
         $_SESSION['compras'] = $controller->listar();
 

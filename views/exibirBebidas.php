@@ -1,6 +1,9 @@
 <?php        
       require_once '../models/bebida.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
+
+      exigirAdmin();
 
       $bebidas = $_SESSION['bebidas'];
 ?>

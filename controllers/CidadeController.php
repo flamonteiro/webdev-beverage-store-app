@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../dao/cidadeDAO.inc.php';
 require_once __DIR__ . '/../models/cidade.inc.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 class CidadeController{
     private $cidadeDao;
@@ -44,6 +45,7 @@ class CidadeController{
 
 if (isset($_REQUEST['opcao'])) {
     session_start();
+    exigirAdmin(); // controle de cidades e restrito ao administrador
     $opcao = $_REQUEST['opcao'];
     $controller = new CidadeController();
 

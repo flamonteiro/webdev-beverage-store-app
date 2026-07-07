@@ -15,8 +15,8 @@
         Clientes
       </a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Cadastrar</a></li>
-        <li><a class="dropdown-item" href="#">Seus dados</a></li>
+        <li><a class="dropdown-item" href="cadastrarCliente.php">Cadastrar</a></li>
+        <li><a class="dropdown-item" href="meusDados.php">Seus dados</a></li>
       </ul>
     </li>
 
