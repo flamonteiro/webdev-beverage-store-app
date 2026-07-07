@@ -17,7 +17,7 @@ echo "== CidadeDao ==\n";
 
 // cadastrar
 $cidade = new Cidade();
-$cidade->setCidade('Vitoria Teste', 'ES', '29000-000', 0.05, 0.0);
+$cidade->setCidade('Vitoria Teste', 'ES', '29000-000', 0.05);
 $dao->cadastrar($cidade);
 
 $sql = $con->prepare("select * from cidades where cidade = :cidade");
@@ -32,7 +32,7 @@ $id = $row->id_cidade;
 
 // alterar
 $cidadeAlterada = new Cidade();
-$cidadeAlterada->setCidade('Vitoria Teste', 'ES', '29000-111', 0.08, 0.0);
+$cidadeAlterada->setCidade('Vitoria Teste', 'ES', '29000-111', 0.08);
 $dao->alterar($id, $cidadeAlterada);
 
 $row2 = buscarCidade($con, $id);

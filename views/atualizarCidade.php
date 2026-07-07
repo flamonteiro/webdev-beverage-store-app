@@ -36,13 +36,8 @@
   </div>
 
   <div class="col-md-6">
-    <label for="cValorFrete" class="form-label">Valor do Frete (por Peso)</label>
+    <label for="cValorFrete" class="form-label">Valor do Frete</label>
     <input type="text" class="form-control" name="cValorFrete" value="<?= $cidade->getValorfrete_porPeso() ?>">
-  </div>
-
-  <div class="col-md-6">
-    <label for="cPeso" class="form-label">Peso Limite/Base (kg)</label>
-    <input type="text" class="form-control" name="cPeso" value="<?= $cidade->getPeso() ?>">
   </div>
 
   <div class="col-12 text-center mt-4">

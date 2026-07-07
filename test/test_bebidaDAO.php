@@ -17,7 +17,7 @@ echo "== BebidaDao ==\n";
 
 // cadastrar
 $bebida = new Bebida();
-$bebida->setBebida('Cerveja Teste', '350ml', 5.50, 0.35, 100, 'Fabricante Teste');
+$bebida->setBebida('Cerveja Teste', '350ml', 5.50, 100, 'Fabricante Teste');
 $dao->cadastrar($bebida);
 
 $sql = $con->prepare("select * from bebidas where nome = :nome");
@@ -32,7 +32,7 @@ $id = $row->id_bebida;
 
 // alterar
 $bebidaAlterada = new Bebida();
-$bebidaAlterada->setBebida('Cerveja Teste', '350ml', 6.00, 0.35, 80, 'Fabricante Teste');
+$bebidaAlterada->setBebida('Cerveja Teste', '350ml', 6.00, 80, 'Fabricante Teste');
 $dao->alterar($id, $bebidaAlterada);
 
 $row2 = buscarBebida($con, $id);

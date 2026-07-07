@@ -4,7 +4,6 @@
       public $nome;
       public $volume;
       public $preco;
-      public $peso;
       public $qde_estoque;
       public $fabricante;
       public $imagem;
@@ -13,7 +12,7 @@
 
       }
 
-      function setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem = 'drinklogo.jpg')
+      function setBebida($nome, $volume, $preco, $qde_estoque, $fabricante, $imagem = 'drinklogo.jpg')
       {
                if(trim($nome) === ''){
                    throw new InvalidArgumentException('Nome da bebida nao pode ser vazio.');
@@ -23,9 +22,6 @@
                }
                if(!is_numeric($preco) || $preco <= 0){
                    throw new InvalidArgumentException('Preco deve ser um numero maior que zero.');
-               }
-               if(!is_numeric($peso) || $peso <= 0){
-                   throw new InvalidArgumentException('Peso deve ser um numero maior que zero.');
                }
                if(!is_numeric($qde_estoque) || $qde_estoque < 0){
                    throw new InvalidArgumentException('Quantidade em estoque nao pode ser negativa.');
@@ -37,7 +33,6 @@
                $this->nome = $nome;
                $this->volume = $volume;
                $this->preco = $preco;
-               $this->peso = $peso;
                $this->qde_estoque = $qde_estoque;
                $this->fabricante = $fabricante;
                $this->imagem = trim($imagem) === '' ? 'drinklogo.jpg' : $imagem;
@@ -76,16 +71,6 @@
       public function setPreco($pPreco)
       {
              return $this->preco = $pPreco;
-      }
-
-      public function getPeso()
-      {
-             return $this->peso;
-      }
-
-      public function setPeso($pPeso)
-      {
-             return $this->peso = $pPeso;
       }
 
       public function getQde_estoque()

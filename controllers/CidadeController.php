@@ -10,18 +10,18 @@ class CidadeController{
         $this->cidadeDao = new CidadeDao();
     }
 
-    public function cadastrar($cidade, $estado, $CEP, $valorfrete_porPeso, $peso)
+    public function cadastrar($cidade, $estado, $CEP, $valorfrete_porPeso)
     {
         $cidadeObj = new Cidade();
-        $cidadeObj->setCidade($cidade, $estado, $CEP, $valorfrete_porPeso, $peso);
+        $cidadeObj->setCidade($cidade, $estado, $CEP, $valorfrete_porPeso);
 
         return $this->cidadeDao->cadastrar($cidadeObj);
     }
 
-    public function alterar($id_cidade, $cidade, $estado, $CEP, $valorfrete_porPeso, $peso)
+    public function alterar($id_cidade, $cidade, $estado, $CEP, $valorfrete_porPeso)
     {
         $cidadeObj = new Cidade();
-        $cidadeObj->setCidade($cidade, $estado, $CEP, $valorfrete_porPeso, $peso);
+        $cidadeObj->setCidade($cidade, $estado, $CEP, $valorfrete_porPeso);
 
         return $this->cidadeDao->alterar($id_cidade, $cidadeObj);
     }
@@ -54,8 +54,7 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['cCidade'],
             $_REQUEST['cEstado'],
             $_REQUEST['cCEP'],
-            $_REQUEST['cValorFrete'],
-            $_REQUEST['cPeso']
+            $_REQUEST['cValorFrete']
         );
         header("Location: CidadeController.php?opcao=2");
     } else if ($opcao == 2) { // listar
@@ -73,8 +72,7 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['cCidade'],
             $_REQUEST['cEstado'],
             $_REQUEST['cCEP'],
-            $_REQUEST['cValorFrete'],
-            $_REQUEST['cPeso']
+            $_REQUEST['cValorFrete']
         );
         header("Location: CidadeController.php?opcao=2");
     }

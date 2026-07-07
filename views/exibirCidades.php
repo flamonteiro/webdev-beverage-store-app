@@ -19,8 +19,7 @@
         <th>Cidade</th>
         <th>Estado</th>
         <th>CEP</th>
-        <th>Frete por Peso</th>
-        <th>Peso Base</th>
+        <th>Valor do Frete</th>
         <th style="width: 12%;">Operação</th>
       </tr>
     </thead>
@@ -32,7 +31,6 @@
           <td><?= $cidade->getEstado() ?></td>
           <td><?= $cidade->getCEP() ?></td>
           <td>R$ <?= number_format($cidade->getValorfrete_porPeso(), 2, ',', '.') ?></td>
-          <td><?= $cidade->getPeso() ?> kg</td>
           <td>
             <a href='../controllers/CidadeController.php?opcao=4&id=<?= $cidade->getId_cidade() ?>' class='btn btn-success btn-sm' title="Alterar">A</a>
             <a href='../controllers/CidadeController.php?opcao=3&id=<?= $cidade->getId_cidade() ?>' class='btn btn-danger btn-sm' title="Excluir">X</a>

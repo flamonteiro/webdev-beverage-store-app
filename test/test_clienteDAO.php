@@ -19,7 +19,7 @@ echo "== ClienteDao ==\n";
 
 // precisa de uma cidade existente pra usar como id_cidade
 $cidade = new Cidade();
-$cidade->setCidade('Vila Velha Teste', 'ES', '29100-000', 0.05, 0.0);
+$cidade->setCidade('Vila Velha Teste', 'ES', '29100-000', 0.05);
 $cidadeDao->cadastrar($cidade);
 
 $sqlCidade = $con->prepare("select id_cidade from cidades where cidade = :cidade");
