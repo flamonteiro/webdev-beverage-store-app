@@ -16,7 +16,7 @@
         Você deseja realmente sair do sistema?
       </div>
       <div class="modal-footer">
-        <a class='btn btn-primary me-2' role='button' href='../inserircontroller'>Sair</a>
+        <a class='btn btn-primary me-2' role='button' href='../controllers/AuthController.php?pOpcao=2'>Sair</a>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>        
       </div>
     </div>

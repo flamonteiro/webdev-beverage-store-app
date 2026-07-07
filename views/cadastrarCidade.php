@@ -1,11 +1,14 @@
 <?php
-    require_once "includes/cabecalho.inc.php";   
+    require_once "../helpers/session.php";
+    require_once "includes/cabecalho.inc.php";
+
+    exigirAdmin();
 ?>
 <p>
 <h1 class="text-center">Cadastro de Cidade</h1>
 <p> 
   
-<form class="row g-3" action="../controlers/controlerCidade.php" method="post">
+<form class="row g-3" action="../controllers/CidadeController.php" method="post">
   
   <div class="col-md-6">
     <label for="cCidade" class="form-label">Cidade</label>
@@ -23,21 +26,16 @@
   </div>
 
   <div class="col-md-6">
-    <label for="cValorFrete" class="form-label">Valor do Frete (por Peso)</label>
+    <label for="cValorFrete" class="form-label">Valor do Frete</label>
     <input type="text" class="form-control" name="cValorFrete" required>
   </div>
 
-  <div class="col-md-6">
-    <label for="cPeso" class="form-label">Peso Limite/Base (kg)</label>
-    <input type="text" class="form-control" name="cPeso" required>
-  </div>
 
   <div class="col-12 mt-4">
     <button type="submit" class="btn btn-primary">Incluir</button>
     <button type="reset" class="btn btn-danger">Cancelar</button>
   </div>
   
-  <!-- ALTERAR VALUE CONFORME O CONTROLLER -->
   <input type="hidden" name="opcao" value="1">
 </form>
 

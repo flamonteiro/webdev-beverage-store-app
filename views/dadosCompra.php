@@ -1,9 +1,16 @@
 <?php
-      require_once '../classes/item.inc.php';
+      require_once '../models/item.inc.php';
+      require_once '../dao/cidadeDAO.inc.php';
+      require_once '../helpers/session.php';
       require_once "includes/cabecalho.inc.php";
+
+      exigirLogin();
+
       $carrinho = $_SESSION['carrinho'];
       $cliente = $_SESSION['cliente'];
       $total = $_SESSION['total'];
+      $frete = $_SESSION['frete'];
+      $cidade = (new CidadeDao())->buscarPorId($cliente->id_cidade);
 ?>
 
 <h1 class="text-center my-4">Dados do Cliente</h1>
@@ -13,7 +20,7 @@
     <p class="mb-2"><b>Nome:</b> <?= $cliente->nome ?></p>
     <p class="mb-2"><b>CNPJ:</b> <?= $cliente->cnpj ?></p>
     <p class="mb-2"><b>Endereço:</b> <?= $cliente->endereco ?></p>
-    <p class="mb-2"><b>Cidade:</b> <?= $cliente->cidade ?> - <?= $cliente->estado ?></p>
+    <p class="mb-2"><b>Cidade:</b> <?= $cidade->getCidade() ?> - <?= $cidade->getEstado() ?></p>
     <p class="mb-0"><b>Email:</b> <?= $cliente->email ?></p>
   </div>
 </div>
@@ -38,7 +45,7 @@
     <tbody class="table-group-divider">
       <?php foreach($carrinho as $item){ ?>
         <tr>
-          <td><?= $item->getBebida()->getIdBebida() ?></td>
+          <td><?= $item->getBebida()->getId_bebida() ?></td>
           <td><?= $item->getBebida()->getNome() ?></td>
           <td><?= $item->getBebida()->getVolume() ?></td>
           <td><?= $item->getBebida()->getFabricante() ?></td>
@@ -47,12 +54,21 @@
           <td>R$ <?= number_format($item->getValorItem(), 2, ',', '.') ?></td>
         </tr>
       <?php } ?>
-      
+
       <tr>
-        <td colspan="7" class="text-end pe-4">
-          <span class="fs-4 text-danger fw-bold">
-            Valor Total = R$ <?= number_format($total, 2, ',', '.') ?>
-          </span>
+        <td colspan="6" class="text-end pe-4">Valor dos Itens</td>
+        <td>R$ <?= number_format($total, 2, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-end pe-4">Valor do Frete</td>
+        <td>R$ <?= number_format($frete, 2, ',', '.') ?></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="text-end pe-4">
+          <span class="fs-4 text-danger fw-bold">Valor Total</span>
+        </td>
+        <td>
+          <span class="fs-4 text-danger fw-bold">R$ <?= number_format($total + $frete, 2, ',', '.') ?></span>
         </td>
       </tr>
     </tbody>

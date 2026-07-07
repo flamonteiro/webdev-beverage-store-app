@@ -1,22 +1,24 @@
 <?php        
-      require_once '../classes/produto.inc.php';
-      require_once '../classes/cidade.inc.php';
-      require_once '../utils/funcoesUteis.php';
+      require_once '../models/bebida.inc.php';
+      require_once '../models/cidade.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
 
+      exigirAdmin();
+
       // Recupera os dados das sessões
-      $bebidas = isset($_SESSION['produtos']) ? $_SESSION['produtos'] : [];
+      $bebidas = isset($_SESSION['bebidas']) ? $_SESSION['bebidas'] : [];
       $cidades = isset($_SESSION['cidades']) ? $_SESSION['cidades'] : [];
 
       // Cálculos rápidos para os Cards de Indicadores
       $totalBebidasCadastradas = count($bebidas);
       $totalCidadesAtendidas = count($cidades);
-      
+
       $totalEstoqueGeral = 0;
       $bebidasAlertaEstoque = 0;
       foreach($bebidas as $b) {
-          $totalEstoqueGeral += $b->getQdeEstoque();
-          if($b->getQdeEstoque() < 10) { // Alerta se o estoque for menor que 10 unidades
+          $totalEstoqueGeral += $b->getQde_estoque();
+          if($b->getQde_estoque() < 10) { // Alerta se o estoque for menor que 10 unidades
               $bebidasAlertaEstoque++;
           }
       }
@@ -76,7 +78,7 @@
       <div class="card shadow-sm">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-middle py-3">
           <h5 class="mb-0 fw-bold align-self-center">📦 Visão Geral do Estoque de Bebidas</h5>
-          <a href="cadastroBebida.php" class="btn btn-outline-light btn-sm fw-bold">+ Nova Bebida</a>
+          <a href="cadastrarBebida.php" class="btn btn-outline-light btn-sm fw-bold">+ Nova Bebida</a>
         </div>
         <div class="card-body p-0">
           <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
@@ -94,22 +96,22 @@
               <tbody>
                 <?php if(empty($bebidas)) { ?>
                   <tr><td colspan="6" class="text-muted py-4">Nenhuma bebida cadastrada.</td></tr>
-                <?php } else { 
-                  foreach($bebidas as $bebida) { 
-                    $critico = $bebida->getQdeEstoque() < 10;
+                <?php } else {
+                  foreach($bebidas as $bebida) {
+                    $critico = $bebida->getQde_estoque() < 10;
                 ?>
                   <tr class="<?= $critico ? 'table-danger' : '' ?>">
-                    <td><?= $bebida->getIdBebida() ?></td>
+                    <td><?= $bebida->getId_bebida() ?></td>
                     <td><strong><?= $bebida->getNome() ?></strong></td>
                     <td><?= $bebida->getVolume() ?></td>
                     <td>R$ <?= number_format($bebida->getPreco(), 2, ',', '.') ?></td>
                     <td>
                       <span class="badge <?= $critico ? 'bg-danger' : 'bg-dark' ?> fs-6">
-                        <?= $bebida->getQdeEstoque() ?>
+                        <?= $bebida->getQde_estoque() ?>
                       </span>
                     </td>
                     <td>
-                      <a href='../controlers/controlerProduto.php?opcao=4&id=<?= $bebida->getIdBebida() ?>' class='btn btn-success btn-sm' title="Editar">A</a>
+                      <a href='../controllers/BebidaController.php?opcao=4&id=<?= $bebida->getId_bebida() ?>' class='btn btn-success btn-sm' title="Editar">A</a>
                     </td>
                   </tr>
                 <?php }} ?>
@@ -125,7 +127,7 @@
       <div class="card shadow-sm">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-middle py-3">
           <h5 class="mb-0 fw-bold align-self-center">📍 Cidades e Fretes</h5>
-          <a href="cadastroCidade.php" class="btn btn-outline-light btn-sm fw-bold">+ Nova Cidade</a>
+          <a href="cadastrarCidade.php" class="btn btn-outline-light btn-sm fw-bold">+ Nova Cidade</a>
         </div>
         <div class="card-body p-0">
           <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
@@ -141,15 +143,15 @@
               <tbody>
                 <?php if(empty($cidades)) { ?>
                   <tr><td colspan="4" class="text-muted py-4">Nenhuma cidade cadastrada.</td></tr>
-                <?php } else { 
-                  foreach($cidades as $cidade) { 
+                <?php } else {
+                  foreach($cidades as $cidade) {
                 ?>
                   <tr>
                     <td><strong><?= $cidade->getCidade() ?></strong> - <?= $cidade->getEstado() ?></td>
                     <td><small class="text-muted"><?= $cidade->getCEP() ?></small></td>
-                    <td>R$ <?= number_format($cidade->getValorFretePorPeso(), 2, ',', '.') ?></td>
+                    <td>R$ <?= number_format($cidade->getValorfrete_porPeso(), 2, ',', '.') ?></td>
                     <td>
-                      <a href='../controlers/controlerCidade.php?opcao=4&id=<?= $cidade->getIdCidade() ?>' class='btn btn-success btn-sm' title="Editar">A</a>
+                      <a href='../controllers/CidadeController.php?opcao=4&id=<?= $cidade->getId_cidade() ?>' class='btn btn-success btn-sm' title="Editar">A</a>
                     </td>
                   </tr>
                 <?php }} ?>

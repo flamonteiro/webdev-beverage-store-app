@@ -35,7 +35,8 @@ CREATE TABLE `bebidas` (
   `preco` float NOT NULL,
   `peso` float NOT NULL,
   `qde_estoque` int(11) NOT NULL,
-  `fabricante` varchar(20) NOT NULL
+  `fabricante` varchar(20) NOT NULL,
+  `imagem` varchar(100) NOT NULL DEFAULT 'drinklogo.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -66,7 +67,8 @@ CREATE TABLE `clientes` (
   `endereco` varchar(150) NOT NULL,
   `id_cidade` int(11) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `senha` varchar(60) NOT NULL
+  `senha` varchar(60) NOT NULL,
+  `tipo` char(1) NOT NULL DEFAULT 'C'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

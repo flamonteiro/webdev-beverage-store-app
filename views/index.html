@@ -9,23 +9,23 @@
   <body>
         <div class="container">
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                 <img src="imagens/logoaqui">&nbsp;&nbsp;
+                <a href="index.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                 <img src="imagens/drinklogo.jpg" style="height: 50px; width: auto;">&nbsp;&nbsp;
                   <h4>Distribuidora de Bebidas</h4>
                 </a>
-          
+
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                  <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-                  
+                  <li><a href="index.php" class="nav-link px-2 link-secondary">Home</a></li>
+
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Bebidas
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Cadastrar</a></li>
-                      <li><a class="dropdown-item" href="#">Consultar</a></li>
+                      <li><a class="dropdown-item" href="cadastrarBebida.php">Cadastrar</a></li>
+                      <li><a class="dropdown-item" href="../controllers/BebidaController.php?opcao=2">Consultar</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Show Room</a></li>
+                      <li><a class="dropdown-item" href="../controllers/BebidaController.php?opcao=6">Show Room</a></li>
                     </ul>
                   </li>
 
@@ -34,8 +34,8 @@
                       Cidades
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Cadastrar</a></li>                      
-                      <li><a class="dropdown-item" href="#">Consultar</a></li>
+                      <li><a class="dropdown-item" href="cadastrarCidade.php">Cadastrar</a></li>
+                      <li><a class="dropdown-item" href="../controllers/CidadeController.php?opcao=2">Consultar</a></li>
                     </ul>
                   </li>
 
@@ -44,20 +44,20 @@
                       Vendas
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Histórico de Vendas</a></li>                      
+                      <li><a class="dropdown-item" href="../controllers/PedidoController.php?opcao=2">Histórico de Vendas</a></li>
 
                     </ul>
                   </li>
-                  <li><a href="#" class="nav-link px-2 link-dark">Dashboard</a></li>
+                  <li><a href="exibirDashboard.php" class="nav-link px-2 link-dark">Dashboard</a></li>
 
                   <li>
-                    <a href="#" class="nav-link px-2 link-dark">Carrinho</a></li>
+                    <a href="exibirCarrinho.php" class="nav-link px-2 link-dark">Carrinho</a>
                   </li>
                 </ul>
 
                 <div class="col-md-3 text-end">
-                  <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                  <button type="button" class="btn btn-primary">Sair</button>
+                  <a href="formLogin.php" role="button" class="btn btn-outline-primary me-2">Login</a>
+                  <a href="../controllers/AuthController.php?pOpcao=2" role="button" class="btn btn-primary">Sair</a>
                 </div>
               </header>
               
@@ -78,9 +78,6 @@
             </section>
 
             <!-- Rodape -->
-
-            <?php require_once "rodape.inc.php"?>
-            <div class="b-example-divider"></div>
 
             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
               <symbol id="bootstrap" viewBox="0 0 118 94">

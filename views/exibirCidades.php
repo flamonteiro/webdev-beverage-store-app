@@ -1,7 +1,9 @@
 <?php        
-      require_once '../classes/cidade.inc.php'; // Incluindo a classe de cidade correspondente
-      require_once '../utils/funcoesUteis.php';
+      require_once '../models/cidade.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
+
+      exigirAdmin();
 
       // Carrega a lista de cidades
       $cidades = $_SESSION['cidades'];
@@ -25,16 +27,15 @@
     <tbody class="table-group-divider">
       <?php foreach($cidades as $cidade) { ?>
         <tr>
-          <td><?= $cidade->getIdCidade() ?></td>
+          <td><?= $cidade->getId_cidade() ?></td>
           <td><strong><?= $cidade->getCidade() ?></strong></td>
           <td><?= $cidade->getEstado() ?></td>
           <td><?= $cidade->getCEP() ?></td>
-          <td>R$ <?= number_format($cidade->getValorFretePorPeso(), 2, ',', '.') ?></td>
+          <td>R$ <?= number_format($cidade->getValorfrete_porPeso(), 2, ',', '.') ?></td>
           <td><?= $cidade->getPeso() ?> kg</td>
           <td>
-            
-            <a href='../controllers/inserirController.php?opcao=4&id=<?= $cidade->getIdCidade() ?>' class='btn btn-success btn-sm' title="Alterar">A</a>
-            <a href='../controllers/inserirController.php?opcao=3&id=<?= $cidade->getIdCidade() ?>' class='btn btn-danger btn-sm' title="Excluir">X</a>
+            <a href='../controllers/CidadeController.php?opcao=4&id=<?= $cidade->getId_cidade() ?>' class='btn btn-success btn-sm' title="Alterar">A</a>
+            <a href='../controllers/CidadeController.php?opcao=3&id=<?= $cidade->getId_cidade() ?>' class='btn btn-danger btn-sm' title="Excluir">X</a>
           </td>
         </tr>
       <?php } ?>

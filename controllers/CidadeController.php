@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../dao/cidadeDAO.inc.php';
 require_once __DIR__ . '/../models/cidade.inc.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 class CidadeController{
     private $cidadeDao;
@@ -40,6 +41,43 @@ class CidadeController{
         return $this->cidadeDao->buscarPorId($id_cidade);
     }
 
+}
+
+if (isset($_REQUEST['opcao'])) {
+    session_start();
+    exigirAdmin(); // controle de cidades e restrito ao administrador
+    $opcao = $_REQUEST['opcao'];
+    $controller = new CidadeController();
+
+    if ($opcao == 1) { // cadastrar
+        $controller->cadastrar(
+            $_REQUEST['cCidade'],
+            $_REQUEST['cEstado'],
+            $_REQUEST['cCEP'],
+            $_REQUEST['cValorFrete'],
+            $_REQUEST['cPeso']
+        );
+        header("Location: CidadeController.php?opcao=2");
+    } else if ($opcao == 2) { // listar
+        $_SESSION['cidades'] = $controller->listar();
+        header("Location: ../views/exibirCidades.php");
+    } else if ($opcao == 3) { // excluir
+        $controller->excluir((int) $_REQUEST['id']);
+        header("Location: CidadeController.php?opcao=2");
+    } else if ($opcao == 4) { // buscar para alterar
+        $_SESSION['cidade'] = $controller->buscarPorId((int) $_REQUEST['id']);
+        header("Location: ../views/atualizarCidade.php");
+    } else if ($opcao == 5) { // alterar
+        $controller->alterar(
+            (int) $_REQUEST['cIdCidade'],
+            $_REQUEST['cCidade'],
+            $_REQUEST['cEstado'],
+            $_REQUEST['cCEP'],
+            $_REQUEST['cValorFrete'],
+            $_REQUEST['cPeso']
+        );
+        header("Location: CidadeController.php?opcao=2");
+    }
 }
 
 ?>

@@ -1,3 +1,5 @@
+<?php require_once 'includes/cabecalho.inc.php'; ?>
+
 <!-- CONTEUDO -->
 <h1 class="text-center">Login de Usuário</h1>
 
@@ -9,7 +11,7 @@
             </div>
             <div class="card-body p-4 p-sm-5">
                 <h5 class="card-title text-center mb-5 fw-light fs-5">Entre com suas informações de Login</h5>
-                <form action="./controllers/AuthController.php" method="get">
+                <form action="../controllers/AuthController.php" method="get">
 
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInputEmail" placeholder="nome@exemplo.com" name="pEmail">
@@ -27,6 +29,11 @@
 
                     <input type="hidden" value="1" name="pOpcao">
                 </form>
+
+                <p class="text-center mt-4 mb-0">
+                    Ainda não tem uma conta?
+                    <a href="cadastrarCliente.php">Cadastre-se</a>
+                </p>
             </div>
         </div>
     </div>
@@ -34,3 +41,4 @@
 </div>
 
 <!-- Rodape -->
+<?php require_once 'includes/rodape.inc.php'; ?>

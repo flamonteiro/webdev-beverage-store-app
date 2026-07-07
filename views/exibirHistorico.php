@@ -1,6 +1,9 @@
-<?php        
-      require_once '../utils/funcoesUteis.php';
+<?php
+      require_once '../models/pedido.inc.php';
+      require_once '../helpers/session.php';
       require_once 'includes/cabecalho.inc.php';
+
+      exigirAdmin();
 
       // Recupera o histórico de compras/vendas da sessão
       $compras = isset($_SESSION['compras']) ? $_SESSION['compras'] : [];
@@ -12,7 +15,7 @@
 
       foreach($compras as $compra) {
           $faturamentoTotal += $compra->getValorTotal();
-          $faturamentoFrete += $compra->getValorTotalFrete();
+          $faturamentoFrete += $compra->getValortotalFrete();
       }
 
       // Evita divisão por zero se não houver vendas
@@ -81,19 +84,18 @@
                   Nenhuma venda realizada até o momento.
                 </td>
               </tr>
-            <?php } else { 
-              foreach($compras as $compra) { 
-                $totalGeralPedido = $compra->getValorTotal() + $compra->getValorTotalFrete();
+            <?php } else {
+              foreach($compras as $compra) {
+                $totalGeralPedido = $compra->getValorTotal() + $compra->getValortotalFrete();
             ?>
               <tr>
                 <td>#<?= $compra->getIdCompra() ?></td>
-                <!-- Exibe os dados do cliente vinculado ao pedido (ou id_cliente caso não possua o objeto completo) -->
                 <td>
-                  <strong><?= method_exists($compra, 'getCliente') ? $compra->getCliente()->getNome() : "ID Cliente: " . $compra->getIdCliente() ?></strong>
+                  <strong>ID Cliente: <?= $compra->getId_cliente() ?></strong>
                 </td>
-                <td><?= date("d/m/Y", strtotime($compra->getDataCompra())) ?></td>
+                <td><?= date("d/m/Y", $compra->getDataCompra()) ?></td>
                 <td>R$ <?= number_format($compra->getValorTotal(), 2, ',', '.') ?></td>
-                <td class="text-muted">R$ <?= number_format($compra->getValorTotalFrete(), 2, ',', '.') ?></td>
+                <td class="text-muted">R$ <?= number_format($compra->getValortotalFrete(), 2, ',', '.') ?></td>
                 <td class="text-success fw-bold">R$ <?= number_format($totalGeralPedido, 2, ',', '.') ?></td>
                 <td>
                   <!-- Link para uma página futura onde lista os itens_compra daquele ID específico -->

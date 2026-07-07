@@ -1,19 +1,18 @@
 <?php
-      require_once '../classes/item.inc.php';
+      require_once '../models/item.inc.php';
       require_once 'includes/cabecalho.inc.php';
+
+      $carrinho = $_SESSION['carrinho'] ?? [];
 ?>
 
 <h1 class="text-center my-4">Carrinho de Compra</h1>
 
-<!-- OBS: CHECAR COM BACKEND/DADOS -->
-<!-- <?php
-     if(isset($_REQUEST['status'])){
-            require_once 'includes/carrinhoVazio.inc.php';
-     } else {
-            $carrinho = $_SESSION['carrinho'];
-            $cont = 1;
-            $soma = 0;
-?> -->
+<?php if(empty($carrinho)) {
+      require_once 'includes/carrinhoVazio.inc.php';
+} else {
+      $cont = 1;
+      $soma = 0;
+?>
 
 <div class="table-responsive">
   <table class="table table-light table-striped table-bordered text-center align-middle">
@@ -26,7 +25,7 @@
         <th>Fabricante</th>
         <th>Preço Unitário</th>
         <th>Quantidade</th>
-        <th>Total Item</th>                
+        <th>Total Item</th>
         <th style="width: 10%;">Remover</th>
       </tr>
     </thead>
@@ -34,7 +33,7 @@
       <?php foreach($carrinho as $item){ ?>
         <tr>
           <td><?= $cont ?></td>
-          <td><?= $item->getBebida()->getIdBebida() ?></td>
+          <td><?= $item->getBebida()->getId_bebida() ?></td>
           <td><strong><?= $item->getBebida()->getNome() ?></strong></td>
           <td><?= $item->getBebida()->getVolume() ?></td>
           <td><?= $item->getBebida()->getFabricante() ?></td>
@@ -42,16 +41,16 @@
           <td><?= $item->getQuantidade() ?></td>
           <td>R$ <?= number_format($item->getValorItem(), 2, ',', '.') ?></td>
           <td>
-            <a href="../controllers/inserirController.php?opcao=2&index=<?= $cont - 1 ?>" class='btn btn-danger btn-sm' title="Remover item">X</a>
-          </td>   
+            <a href="../controllers/CarrinhoController.php?opcao=2&index=<?= $cont - 1 ?>" class='btn btn-danger btn-sm' title="Remover item">X</a>
+          </td>
         </tr>
 
-      <?php 
+      <?php
           $cont++;
           $soma += $item->getValorItem();
-        } 
+        }
       ?>
-         
+
       <tr>
         <td colspan="9" class="text-end pe-4">
           <span class="fs-4 text-danger fw-bold">
@@ -60,30 +59,29 @@
         </td>
       </tr>
     </tbody>
-  </table> 
+  </table>
 </div>
 
 <div class="container text-center my-5">
   <div class="row g-3">
     <div class="col-md-4">
-      <a class="btn btn-warning w-100 fw-bold" role="button" href="../controllers/inserirController.php?opcao=6">
+      <a class="btn btn-warning w-100 fw-bold" role="button" href="../controllers/BebidaController.php?opcao=6">
         Continuar Comprando
       </a>
     </div>
     <div class="col-md-4">
-      <a class="btn btn-danger w-100 fw-bold" role="button" href="../controllers/inserirController.php?opcao=3">
+      <a class="btn btn-danger w-100 fw-bold" role="button" href="../controllers/CarrinhoController.php?opcao=3">
         Esvaziar Carrinho
       </a>
     </div>
     <div class="col-md-4">
-      <a class="btn btn-success w-100 fw-bold" role="button" href="../controllers/inserirController.php?opcao=5&total=<?= $soma ?>">
+      <a class="btn btn-success w-100 fw-bold" role="button" href="../controllers/CarrinhoController.php?opcao=5&total=<?= $soma ?>">
         Finalizar Compra
       </a>
     </div>
   </div>
 </div>
 
-<?php
-     }
-     require_once 'includes/rodape.inc.php';
-?>
+<?php } ?>
+
+<?php require_once 'includes/rodape.inc.php'; ?>

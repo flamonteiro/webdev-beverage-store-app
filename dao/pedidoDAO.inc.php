@@ -47,7 +47,13 @@ class PedidoDao{
 
     public function listar(){
         $sql = $this->con->query("select * from compras order by data_compra desc");
-        return $sql->fetchAll(PDO::FETCH_OBJ);
+        $compras = array();
+
+        while($row = $sql->fetch(PDO::FETCH_OBJ)){
+            $compras[] = $this->hidratar($row);
+        }
+
+        return $compras;
     }
 
     public function buscarPorId($id_compra){
@@ -57,7 +63,7 @@ class PedidoDao{
 
         $row = $sql->fetch(PDO::FETCH_OBJ);
 
-        return $row === false ? null : $row;
+        return $row === false ? null : $this->hidratar($row);
     }
 
     public function listarItens($id_compra){
@@ -66,6 +72,14 @@ class PedidoDao{
         $sql->execute();
 
         return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    private function hidratar($row){
+        $pedido = new Pedido($row->id_cliente, $row->valor_total, $row->valortotal_frete);
+        $pedido->setIdCompra($row->id_compra);
+        $pedido->setDataCompra(strtotime($row->data_compra));
+
+        return $pedido;
     }
 
 }
