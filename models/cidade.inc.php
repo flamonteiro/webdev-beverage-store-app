@@ -23,9 +23,11 @@
                if(trim($CEP) === ''){
                    throw new InvalidArgumentException('CEP nao pode ser vazio.');
                }
-               if(!preg_match('/^\d{5}-?\d{3}$/', $CEP)){
-                   throw new InvalidArgumentException('CEP deve estar no formato 00000-000 ou 00000000.');
+               $cepDigitos = preg_replace('/\D/', '', $CEP);
+               if(strlen($cepDigitos) !== 8){
+                   throw new InvalidArgumentException('CEP deve conter 8 digitos, com ou sem traco (ex: 00000-000).');
                }
+               $CEP = substr($cepDigitos, 0, 5) . '-' . substr($cepDigitos, 5, 3);
                if(!is_numeric($valorfrete_porPeso) || $valorfrete_porPeso < 0){
                    throw new InvalidArgumentException('Valor do frete por peso nao pode ser negativo.');
                }
