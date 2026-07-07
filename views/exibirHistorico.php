@@ -1,5 +1,4 @@
-<?php        
-      require_once '../utils/funcoesUteis.php';
+<?php
       require_once 'includes/cabecalho.inc.php';
 
       // Recupera o histórico de compras/vendas da sessão
@@ -81,8 +80,8 @@
                   Nenhuma venda realizada até o momento.
                 </td>
               </tr>
-            <?php } else { 
-              foreach($compras as $compra) { 
+            <?php } else {
+              foreach($compras as $compra) {
                 $totalGeralPedido = $compra->getValorTotal() + $compra->getValorTotalFrete();
             ?>
               <tr>
