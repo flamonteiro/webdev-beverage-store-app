@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../dao/cidadeDAO.inc.php';
+
 function exigirLogin()
 {
     if (!isset($_SESSION['cliente'])) {
@@ -16,6 +18,19 @@ function exigirAdmin()
         header("Location: ../views/index.php?acessoNegado=1");
         exit;
     }
+}
+
+function calcularTotaisCarrinho()
+{
+    $total = 0;
+    foreach ($_SESSION['carrinho'] ?? [] as $item) {
+        $total += $item->getValorItem();
+    }
+    $_SESSION['total'] = $total;
+
+    $cidadeDao = new CidadeDao();
+    $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
+    $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $total;
 }
 
 ?>

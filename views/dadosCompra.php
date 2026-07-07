@@ -5,6 +5,7 @@
       require_once "includes/cabecalho.inc.php";
 
       exigirLogin();
+      calcularTotaisCarrinho();
 
       $carrinho = $_SESSION['carrinho'];
       $cliente = $_SESSION['cliente'];

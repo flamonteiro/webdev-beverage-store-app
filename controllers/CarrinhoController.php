@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../dao/bebidaDAO.inc.php';
-require_once __DIR__ . '/../dao/cidadeDAO.inc.php';
 require_once __DIR__ . '/../models/item.inc.php';
 require_once __DIR__ . '/../helpers/session.php';
 
@@ -58,14 +57,6 @@ if (isset($_REQUEST['opcao'])) {
         header("Location: ../views/exibirCarrinho.php");
     } else if ($opcao == 5) { // ir para finalizacao da compra
         exigirLogin();
-
-        $total = (float) $_REQUEST['total'];
-        $_SESSION['total'] = $total;
-
-        $cidadeDao = new CidadeDao();
-        $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
-        $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $total;
-
         header("Location: ../views/dadosCompra.php");
     }
 }
