@@ -9,18 +9,18 @@ class BebidaController{
         $this->bebidaDao = new BebidaDao();
     }
 
-    public function cadastrar($nome, $volume, $preco, $peso, $qde_estoque, $fabricante)
+    public function cadastrar($nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem = 'drinklogo.jpg')
     {
         $bebida = new Bebida();
-        $bebida->setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante);
+        $bebida->setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem);
 
         return $this->bebidaDao->cadastrar($bebida);
     }
 
-    public function alterar($id_bebida, $nome, $volume, $preco, $peso, $qde_estoque, $fabricante)
+    public function alterar($id_bebida, $nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem = 'drinklogo.jpg')
     {
         $bebida = new Bebida();
-        $bebida->setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante);
+        $bebida->setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem);
 
         return $this->bebidaDao->alterar($id_bebida, $bebida);
     }
@@ -54,7 +54,8 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['pPreco'],
             $_REQUEST['pPeso'],
             $_REQUEST['pQdeEstoque'],
-            $_REQUEST['pFabricante']
+            $_REQUEST['pFabricante'],
+            $_REQUEST['pImagem'] ?? 'drinklogo.jpg'
         );
         header("Location: BebidaController.php?opcao=2");
     } else if ($opcao == 2 || $opcao == 6) { // listar
@@ -79,7 +80,8 @@ if (isset($_REQUEST['opcao'])) {
             $_REQUEST['pPreco'],
             $_REQUEST['pPeso'],
             $_REQUEST['pQdeEstoque'],
-            $_REQUEST['pFabricante']
+            $_REQUEST['pFabricante'],
+            $_REQUEST['pImagem'] ?? 'drinklogo.jpg'
         );
         header("Location: BebidaController.php?opcao=2");
     }

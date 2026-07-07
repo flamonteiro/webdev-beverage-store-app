@@ -11,7 +11,7 @@ class BebidaDao{
     }
 
     public function cadastrar(Bebida $bebida){
-        $sql = $this->con->prepare("insert into bebidas (nome, volume, preco, peso, qde_estoque, fabricante) values (:nome, :volume, :preco, :peso, :qde_estoque, :fabricante)");
+        $sql = $this->con->prepare("insert into bebidas (nome, volume, preco, peso, qde_estoque, fabricante, imagem) values (:nome, :volume, :preco, :peso, :qde_estoque, :fabricante, :imagem)");
 
         $sql->bindValue(':nome', $bebida->getNome());
         $sql->bindValue(':volume', $bebida->getVolume());
@@ -19,12 +19,13 @@ class BebidaDao{
         $sql->bindValue(':peso', $bebida->getPeso());
         $sql->bindValue(':qde_estoque', $bebida->getQde_estoque());
         $sql->bindValue(':fabricante', $bebida->getFabricante());
+        $sql->bindValue(':imagem', $bebida->getImagem());
 
         return $sql->execute();
     }
 
     public function alterar($id_bebida, Bebida $bebida){
-        $sql = $this->con->prepare("update bebidas set nome = :nome, volume = :volume, preco = :preco, peso = :peso, qde_estoque = :qde_estoque, fabricante = :fabricante where id_bebida = :id");
+        $sql = $this->con->prepare("update bebidas set nome = :nome, volume = :volume, preco = :preco, peso = :peso, qde_estoque = :qde_estoque, fabricante = :fabricante, imagem = :imagem where id_bebida = :id");
 
         $sql->bindValue(':nome', $bebida->getNome());
         $sql->bindValue(':volume', $bebida->getVolume());
@@ -32,6 +33,7 @@ class BebidaDao{
         $sql->bindValue(':peso', $bebida->getPeso());
         $sql->bindValue(':qde_estoque', $bebida->getQde_estoque());
         $sql->bindValue(':fabricante', $bebida->getFabricante());
+        $sql->bindValue(':imagem', $bebida->getImagem());
         $sql->bindValue(':id', $id_bebida);
 
         return $sql->execute();
@@ -67,7 +69,7 @@ class BebidaDao{
 
     private function hidratar($row){
         $bebida = new Bebida();
-        $bebida->setBebida($row->nome, $row->volume, $row->preco, $row->peso, $row->qde_estoque, $row->fabricante);
+        $bebida->setBebida($row->nome, $row->volume, $row->preco, $row->peso, $row->qde_estoque, $row->fabricante, $row->imagem);
         $bebida->id_bebida = $row->id_bebida;
 
         return $bebida;

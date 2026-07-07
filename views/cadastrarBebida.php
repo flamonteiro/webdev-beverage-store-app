@@ -36,6 +36,11 @@
     <input type="text" class="form-control" name="pQdeEstoque" required>
   </div>
 
+  <div class="col-md-6">
+    <label for="pImagem" class="form-label">Imagem (arquivo em views/imagens)</label>
+    <input type="text" class="form-control" name="pImagem" placeholder="Ex: heineken.jpg">
+  </div>
+
   <div class="col-12 mt-4">
     <button type="submit" class="btn btn-primary">Incluir</button>
     <button type="reset" class="btn btn-danger">Cancelar</button>

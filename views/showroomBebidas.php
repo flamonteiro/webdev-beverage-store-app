@@ -15,7 +15,7 @@
 
 <div class="col">
     <div class="card">
-      <img src="imagens/drinklogo.jpg" class="card-img-top" alt="<?= $bebida->getNome() ?>">
+      <img src="imagens/<?= $bebida->getImagem() ?>" class="card-img-top" alt="<?= $bebida->getNome() ?>" onerror="this.src='imagens/drinklogo.jpg'">
       <div class="card-body">
         <h5 class="card-title"><?= $bebida->getNome() ?></h5>
         <p class="card-text"><?= $bebida->getVolume() ?></p>

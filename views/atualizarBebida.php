@@ -47,6 +47,11 @@
     <input type="text" class="form-control" name="pQdeEstoque" value="<?= $bebida->getQde_estoque() ?>">
   </div>
 
+  <div class="col-md-6">
+    <label for="pImagem" class="form-label">Imagem (arquivo em views/imagens)</label>
+    <input type="text" class="form-control" name="pImagem" value="<?= $bebida->getImagem() ?>" placeholder="Ex: heineken.jpg">
+  </div>
+
   <div class="col-12 text-center mt-4">
     <button type="submit" class="btn btn-success">Alterar</button>
   </div>

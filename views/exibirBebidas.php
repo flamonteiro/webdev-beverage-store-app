@@ -12,6 +12,7 @@
     <thead class="table-primary">
       <tr>
         <th style="width: 8%;">ID</th>
+        <th style="width: 8%;">Imagem</th>
         <th>Nome</th>
         <th>Volume</th>
         <th>Peso</th>
@@ -25,6 +26,7 @@
       <?php foreach($bebidas as $bebida) { ?>
         <tr>
           <td><?= $bebida->getId_bebida() ?></td>
+          <td><img src="imagens/<?= $bebida->getImagem() ?>" alt="<?= $bebida->getNome() ?>" style="height: 40px; width: auto;" onerror="this.src='imagens/drinklogo.jpg'"></td>
           <td><strong><?= $bebida->getNome() ?></strong></td>
           <td><?= $bebida->getVolume() ?></td>
           <td><?= $bebida->getPeso() ?> kg</td>

@@ -7,12 +7,13 @@
       public $peso;
       public $qde_estoque;
       public $fabricante;
+      public $imagem;
 
       function __construct(){
 
       }
 
-      function setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante)
+      function setBebida($nome, $volume, $preco, $peso, $qde_estoque, $fabricante, $imagem = 'drinklogo.jpg')
       {
                if(trim($nome) === ''){
                    throw new InvalidArgumentException('Nome da bebida nao pode ser vazio.');
@@ -39,6 +40,7 @@
                $this->peso = $peso;
                $this->qde_estoque = $qde_estoque;
                $this->fabricante = $fabricante;
+               $this->imagem = trim($imagem) === '' ? 'drinklogo.jpg' : $imagem;
       }
 
       public function getId_bebida()
@@ -104,6 +106,16 @@
       public function setFabricante($pFabricante)
       {
              return $this->fabricante = $pFabricante;
+      }
+
+      public function getImagem()
+      {
+             return $this->imagem;
+      }
+
+      public function setImagem($pImagem)
+      {
+             return $this->imagem = $pImagem;
       }
 }
 
