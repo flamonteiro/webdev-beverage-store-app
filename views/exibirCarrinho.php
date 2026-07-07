@@ -75,7 +75,7 @@
       </a>
     </div>
     <div class="col-md-4">
-      <a class="btn btn-success w-100 fw-bold" role="button" href="../controllers/CarrinhoController.php?opcao=5&total=<?= $soma ?>">
+      <a class="btn btn-success w-100 fw-bold" role="button" href="../controllers/CarrinhoController.php?opcao=5">
         Finalizar Compra
       </a>
     </div>
