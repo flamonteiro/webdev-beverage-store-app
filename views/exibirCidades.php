@@ -20,7 +20,7 @@
         <th>Estado</th>
         <th>CEP</th>
         <th>Frete por Peso</th>
-        <th>Peso Base</th>
+        <th>Peso Máximo</th>
         <th style="width: 12%;">Operação</th>
       </tr>
     </thead>

@@ -37,7 +37,7 @@
         font-size: 0.95rem;
       }
       @media (min-width: 768px) {
-        .site-nav { margin-left: 3rem; }
+        .site-nav { margin-left: 4rem; }
       }
     </style>
   </head>

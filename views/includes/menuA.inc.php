@@ -1,5 +1,5 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-  <a href="index.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none brand-lockup">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start py-3 mb-4 border-bottom">
+  <a href="index.php" class="d-flex align-items-center flex-shrink-0 mb-2 mb-md-0 text-dark text-decoration-none brand-lockup">
     <img src="imagens/drinklogo.jpg" class="brand-logo">
     <span class="brand-name">Alegre<span class="brand-name-sub">Distribuidora</span></span>
   </a>
@@ -51,7 +51,7 @@
 
   </ul>
 
-  <div class="col-md-3 text-end">
+  <div class="ms-md-auto flex-shrink-0 text-end">
     <?php
       if (!isset($_SESSION['cliente'])) {
     ?>
