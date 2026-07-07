@@ -1,5 +1,16 @@
 <?php
       require_once '../models/item.inc.php';
+
+      if (session_status() === PHP_SESSION_NONE) {
+          session_start();
+      }
+
+      // administrador nao pode fazer compras com seu próprio perfil
+      if (isset($_SESSION['cliente']) && $_SESSION['cliente']->tipo === 'A') {
+          header("Location: exibirDashboard.php");
+          exit;
+      }
+
       require_once 'includes/cabecalho.inc.php';
 
       $carrinho = $_SESSION['carrinho'] ?? [];

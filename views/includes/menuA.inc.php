@@ -49,8 +49,6 @@
     </li>
     <li><a href="exibirDashboard.php" class="nav-link px-2 link-dark">Dashboard</a></li>
 
-    <li><a href="exibirCarrinho.php" class="nav-link px-2 link-dark">Carrinho</a></li>
-
   </ul>
 
   <div class="col-md-3 text-end">

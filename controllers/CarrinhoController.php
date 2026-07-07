@@ -14,6 +14,13 @@ function buscarItemCarrinho($id_bebida, $carrinho){
 
 if (isset($_REQUEST['opcao'])) {
     session_start();
+
+    // administrador nao pode fazer compras com seu próprio perfil
+    if (isset($_SESSION['cliente']) && $_SESSION['cliente']->tipo === 'A') {
+        header("Location: ../views/exibirDashboard.php");
+        exit;
+    }
+
     $opcao = $_REQUEST['opcao'];
     $bebidaDao = new BebidaDao();
 
