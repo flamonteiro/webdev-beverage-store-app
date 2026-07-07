@@ -7,6 +7,9 @@
 
     $erro = $_SESSION['erroCadastro'] ?? null;
     unset($_SESSION['erroCadastro']);
+
+    $dadosCadastro = $_SESSION['dadosCadastro'] ?? [];
+    unset($_SESSION['dadosCadastro']);
 ?>
 
 <h1 class="text-center">Cadastro de Cliente</h1>
@@ -24,32 +27,32 @@
 
       <div class="col-md-8">
         <label for="pNome" class="form-label">Nome do Estabelecimento</label>
-        <input type="text" class="form-control" name="pNome" required>
+        <input type="text" class="form-control" name="pNome" value="<?= htmlspecialchars($dadosCadastro['pNome'] ?? '') ?>" required>
       </div>
 
       <div class="col-md-4">
         <label for="pCnpj" class="form-label">CNPJ</label>
-        <input type="text" class="form-control" name="pCnpj" required>
+        <input type="text" class="form-control" name="pCnpj" value="<?= htmlspecialchars($dadosCadastro['pCnpj'] ?? '') ?>" required>
       </div>
 
       <div class="col-12">
         <label for="pEndereco" class="form-label">Endereço</label>
-        <input type="text" class="form-control" name="pEndereco" required>
+        <input type="text" class="form-control" name="pEndereco" value="<?= htmlspecialchars($dadosCadastro['pEndereco'] ?? '') ?>" required>
       </div>
 
       <div class="col-md-6">
         <label for="pIdCidade" class="form-label">Cidade</label>
         <select class="form-select" name="pIdCidade" required>
-          <option value="" disabled selected>Selecione a cidade</option>
+          <option value="" disabled <?= empty($dadosCadastro['pIdCidade']) ? 'selected' : '' ?>>Selecione a cidade</option>
           <?php foreach ($cidades as $cidade) { ?>
-            <option value="<?= $cidade->getId_cidade() ?>"><?= htmlspecialchars($cidade->getCidade()) ?> - <?= htmlspecialchars($cidade->getEstado()) ?></option>
+            <option value="<?= $cidade->getId_cidade() ?>" <?= (isset($dadosCadastro['pIdCidade']) && (string) $dadosCadastro['pIdCidade'] === (string) $cidade->getId_cidade()) ? 'selected' : '' ?>><?= htmlspecialchars($cidade->getCidade()) ?> - <?= htmlspecialchars($cidade->getEstado()) ?></option>
           <?php } ?>
         </select>
       </div>
 
       <div class="col-md-6">
         <label for="pEmail" class="form-label">Email</label>
-        <input type="email" class="form-control" name="pEmail" required>
+        <input type="email" class="form-control" name="pEmail" value="<?= htmlspecialchars($dadosCadastro['pEmail'] ?? '') ?>" required>
       </div>
 
       <div class="col-md-6">

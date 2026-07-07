@@ -116,6 +116,14 @@ if (isset($_REQUEST['pOpcao'])) {
             }
         } catch (InvalidArgumentException $e) {
             $_SESSION['erroCadastro'] = $e->getMessage();
+            // guarda o que foi digitado (exceto senhas) para o formulario nao vir vazio apos o redirect
+            $_SESSION['dadosCadastro'] = [
+                'pNome' => $_REQUEST['pNome'],
+                'pCnpj' => $_REQUEST['pCnpj'],
+                'pEndereco' => $_REQUEST['pEndereco'],
+                'pIdCidade' => $_REQUEST['pIdCidade'],
+                'pEmail' => $_REQUEST['pEmail'],
+            ];
             header("Location: ../views/cadastrarCliente.php?erro=1");
         }
     } else if ($pOpcao == 4) { // alterar dados do cliente logado
