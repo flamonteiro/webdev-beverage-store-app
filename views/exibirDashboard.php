@@ -136,7 +136,7 @@
                 <tr>
                   <th>Cidade/UF</th>
                   <th>CEP</th>
-                  <th>Valor do Frete</th>
+                  <th>Frete (por Peso)</th>
                   <th>Ações</th>
                 </tr>
               </thead>

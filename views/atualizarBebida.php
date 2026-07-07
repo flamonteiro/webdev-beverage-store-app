@@ -36,6 +36,11 @@
   </div>
 
   <div class="col-md-3">
+    <label for="pPeso" class="form-label">Peso (kg)</label>
+    <input type="text" class="form-control" name="pPeso" value="<?= $bebida->getPeso() ?>">
+  </div>
+
+  <div class="col-md-3">
     <label for="pFabricante" class="form-label">Fabricante</label>
     <input type="text" class="form-control" name="pFabricante" value="<?= $bebida->getFabricante() ?>">
   </div>

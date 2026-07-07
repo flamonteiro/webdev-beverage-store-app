@@ -33,6 +33,7 @@ CREATE TABLE `bebidas` (
   `nome` varchar(50) NOT NULL,
   `volume` varchar(7) NOT NULL,
   `preco` float NOT NULL,
+  `peso` float NOT NULL,
   `qde_estoque` int(11) NOT NULL,
   `fabricante` varchar(20) NOT NULL,
   `imagem` varchar(100) NOT NULL DEFAULT 'drinklogo.jpg'
@@ -49,7 +50,8 @@ CREATE TABLE `cidades` (
   `cidade` varchar(30) NOT NULL,
   `estado` varchar(2) NOT NULL,
   `CEP` varchar(9) NOT NULL,
-  `valorfrete_porPeso` float NOT NULL
+  `valorfrete_porPeso` float NOT NULL,
+  `peso` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

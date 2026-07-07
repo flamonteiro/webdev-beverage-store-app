@@ -16,7 +16,7 @@ echo "== PedidoDao ==\n";
 
 // setup: cidade, cliente e bebida de teste
 $cidade = new Cidade();
-$cidade->setCidade('Serra Teste', 'ES', '29160-000', 0.05);
+$cidade->setCidade('Serra Teste', 'ES', '29160-000', 0.05, 0.0);
 $cidadeDao->cadastrar($cidade);
 $id_cidade = $con->query("select id_cidade from cidades where cidade = 'Serra Teste'")->fetch(PDO::FETCH_OBJ)->id_cidade;
 
@@ -26,7 +26,7 @@ $clienteDao->cadastrar($cliente);
 $id_cliente = $con->query("select id_cliente from clientes where email = 'pedido@teste.com'")->fetch(PDO::FETCH_OBJ)->id_cliente;
 
 $bebida = new Bebida();
-$bebida->setBebida('Refrigerante Teste', '2L', 8.00, 50, 'Fabricante Teste');
+$bebida->setBebida('Refrigerante Teste', '2L', 8.00, 1.0, 50, 'Fabricante Teste');
 $bebidaDao->cadastrar($bebida);
 $row_bebida = $con->query("select id_bebida from bebidas where nome = 'Refrigerante Teste'")->fetch(PDO::FETCH_OBJ);
 $bebidaCadastrada = $bebidaDao->buscarPorId($row_bebida->id_bebida);

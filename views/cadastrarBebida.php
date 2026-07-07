@@ -25,6 +25,11 @@
   </div>
 
   <div class="col-md-4">
+    <label for="pPeso" class="form-label">Peso (kg)</label>
+    <input type="text" class="form-control" name="pPeso" required>
+  </div>
+
+  <div class="col-md-4">
     <label for="pFabricante" class="form-label">Fabricante</label>
     <input type="text" class="form-control" name="pFabricante" required>
   </div>

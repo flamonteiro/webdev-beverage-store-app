@@ -18,6 +18,7 @@
         <th style="width: 8%;">Imagem</th>
         <th>Nome</th>
         <th>Volume</th>
+        <th>Peso</th>
         <th>Preço Unitário</th>
         <th>Qde. Estoque</th>
         <th>Fabricante</th>
@@ -31,6 +32,7 @@
           <td><img src="imagens/<?= $bebida->getImagem() ?>" alt="<?= $bebida->getNome() ?>" style="height: 40px; width: auto;" onerror="this.src='imagens/drinklogo.jpg'"></td>
           <td><strong><?= $bebida->getNome() ?></strong></td>
           <td><?= $bebida->getVolume() ?></td>
+          <td><?= $bebida->getPeso() ?> kg</td>
           <td>R$ <?= number_format($bebida->getPreco(), 2, ',', '.') ?></td>
           <td><?= $bebida->getQde_estoque() ?></td>
           <td><?= $bebida->getFabricante() ?></td>
