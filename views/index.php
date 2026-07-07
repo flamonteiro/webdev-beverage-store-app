@@ -14,9 +14,9 @@
     <div class="row">
       <div class="col-md-8 mx-auto fs-5" align="justify">
         <img src="imagens/beverageheader.jpg" alt="" class="img-fluid"><br><br>
-        <p>Que tal garantir as bebidas para o seu churrasco, festa ou resenha sem precisar sair de casa? Então confira a nossa loja virtual. <strong>As mesmas marcas, variedade e qualidade que você já encontra na nossa distribuidora física!</strong> Agora também online para abastecer os seus melhores momentos!</p>
-        <p>Nossa Distribuidora oferece uma experiência única para você! Aqui você escolhe se quer comprar na nossa distribuidora física ou virtual, se quer receber suas bebidas trincando de geladas por delivery ou retirar direto com a gente, e se quer pagar com dinheiro, cartão de débito ou crédito, ou via PIX! Só na Loja Des Web você compra do seu jeito!</p>
-        <p>Confira nosso estoque de <strong>cervejas, destilados, refrigerantes e muito mais</strong>, e faça suas compras aproveitando nossos Cupons de Desconto, melhores ofertas e promoções imperdíveis!</p>   
+        <p>Que tal garantir as bebidas para o seu estabelecimento sem sair do lugar? Então confira a nossa loja virtual, feita para atender outras empresas. <strong>As mesmas marcas, variedade e qualidade que sua empresa precisa!</strong></p>
+        <p>Nossa Distribuidora oferece uma experiência única para o seu negócio! Aqui você faz suas compras 100% online e escolhe como prefere pagar: via boleto bancário ou cartão de crédito. Simples, rápido e feito sob medida para empresas como a sua!</p>
+        <p>Confira nosso estoque de <strong>cervejas, destilados, refrigerantes e muito mais</strong>, e faça suas compras com a praticidade que o seu negócio merece!</p>
       </div> 
     </div>
   </div>
