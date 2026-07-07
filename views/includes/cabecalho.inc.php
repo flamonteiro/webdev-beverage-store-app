@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <style>
       .brand-lockup { gap: 1rem; }
-      .brand-logo { height: 100px; width: 100px; object-fit: contain; }
+      .brand-logo { height: 50px; width: 50px; object-fit: contain; }
       .brand-name {
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
