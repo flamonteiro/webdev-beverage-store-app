@@ -28,6 +28,9 @@
         <p class="fs-5">
           Forma de pagamento escolhida: <strong><?= $metodo === 'boleto' ? 'Boleto Bancário' : 'Cartão de Crédito' ?></strong>
         </p>
+        <?php if($metodo === 'boleto'){ ?>
+          <p class="text-muted">O boleto está sendo gerado e em breve será encaminhado para o seu email de cadastro.</p>
+        <?php } ?>
         <a href="../showroomBebidas.php" class="btn btn-primary mt-3">Voltar para a loja</a>
       </div>
 
