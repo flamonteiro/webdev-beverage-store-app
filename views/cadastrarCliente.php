@@ -1,6 +1,9 @@
 <?php
     require_once '../dao/cidadeDAO.inc.php';
+    require_once '../helpers/session.php';
     require_once 'includes/cabecalho.inc.php';
+
+    exigirAdmin(); // cadastro de clientes e restrito ao administrador
 
     $cidadeDao = new CidadeDao();
     $cidades = $cidadeDao->listar();
@@ -13,6 +16,9 @@
 
 <?php if ($erro) { ?>
   <div class="alert alert-danger text-center" role="alert"><?= htmlspecialchars($erro) ?></div>
+<?php } ?>
+<?php if (isset($_GET['sucesso'])) { ?>
+  <div class="alert alert-success text-center" role="alert">Cliente cadastrado com sucesso.</div>
 <?php } ?>
 
 <div class="row">

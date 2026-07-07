@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../dao/bebidaDAO.inc.php';
 require_once __DIR__ . '/../dao/cidadeDAO.inc.php';
 require_once __DIR__ . '/../models/item.inc.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 function buscarItemCarrinho($id_bebida, $carrinho){
     foreach ($carrinho as $index => $item) {
@@ -56,18 +57,16 @@ if (isset($_REQUEST['opcao'])) {
         unset($_SESSION['carrinho']);
         header("Location: ../views/exibirCarrinho.php");
     } else if ($opcao == 5) { // ir para finalizacao da compra
+        exigirLogin();
+
         $total = (float) $_REQUEST['total'];
         $_SESSION['total'] = $total;
 
-        if (isset($_SESSION['cliente'])) {
-            $cidadeDao = new CidadeDao();
-            $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
-            $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $total;
+        $cidadeDao = new CidadeDao();
+        $cidade = $cidadeDao->buscarPorId($_SESSION['cliente']->id_cidade);
+        $_SESSION['frete'] = $cidade->getValorfrete_porPeso() * $total;
 
-            header("Location: ../views/dadosCompra.php");
-        } else {
-            header("Location: ../views/formLogin.php");
-        }
+        header("Location: ../views/dadosCompra.php");
     }
 }
 

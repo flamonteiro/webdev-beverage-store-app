@@ -40,6 +40,8 @@ if (isset($_REQUEST['opcao'])) {
     $opcao = $_REQUEST['opcao'];
 
     if ($opcao == 1) { // finalizar compra
+        exigirLogin();
+
         $cliente = $_SESSION['cliente'];
         $carrinho = $_SESSION['carrinho'];
         $valorTotal = $_SESSION['total'];

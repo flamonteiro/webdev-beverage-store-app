@@ -1,5 +1,8 @@
 <?php
+     require_once '../helpers/session.php';
      require_once 'includes/cabecalho.inc.php';
+
+     exigirLogin();
 ?>
 
 <h1 class="text-center my-4">Opção de Pagamento</h1>

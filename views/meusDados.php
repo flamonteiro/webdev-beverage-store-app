@@ -1,11 +1,9 @@
 <?php
     require_once '../dao/cidadeDAO.inc.php';
+    require_once '../helpers/session.php';
     require_once 'includes/cabecalho.inc.php';
 
-    if (!isset($_SESSION['cliente'])) {
-        header("Location: formLogin.php");
-        exit;
-    }
+    exigirLogin();
 
     $cliente = $_SESSION['cliente'];
     $cidadeDao = new CidadeDao();

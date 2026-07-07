@@ -32,6 +32,15 @@
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Clientes
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="cadastrarCliente.php">Cadastrar</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Vendas
       </a>
       <ul class="dropdown-menu">

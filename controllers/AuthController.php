@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../dao/clienteDAO.inc.php';
 require_once __DIR__ . '/../models/cliente.inc.php';
+require_once __DIR__ . '/../helpers/session.php';
 
 class AuthController{
     private $clienteDao;
@@ -77,7 +78,9 @@ if (isset($_REQUEST['pOpcao'])) {
     } else if ($pOpcao == 2) { // logout
         session_destroy();
         header("Location: ../views/index.php");
-    } else if ($pOpcao == 3) { // cadastrar novo cliente
+    } else if ($pOpcao == 3) { // cadastrar novo cliente - restrito ao administrador
+        exigirAdmin();
+
         $controller = new AuthController();
 
         try {
@@ -98,22 +101,13 @@ if (isset($_REQUEST['pOpcao'])) {
                 throw new InvalidArgumentException('Este email ja esta cadastrado.');
             }
 
-            $_SESSION['cliente'] = $controller->autenticar($_REQUEST['pEmail'], $_REQUEST['pSenha']);
-
-            if (isset($_SESSION['carrinho'])) {
-                header("Location: ../views/dadosCompra.php");
-            } else {
-                header("Location: ../views/showroomBebidas.php");
-            }
+            header("Location: ../views/cadastrarCliente.php?sucesso=1");
         } catch (InvalidArgumentException $e) {
             $_SESSION['erroCadastro'] = $e->getMessage();
             header("Location: ../views/cadastrarCliente.php?erro=1");
         }
     } else if ($pOpcao == 4) { // alterar dados do cliente logado
-        if (!isset($_SESSION['cliente'])) {
-            header("Location: ../views/formLogin.php");
-            exit;
-        }
+        exigirLogin();
 
         $controller = new AuthController();
         $idCliente = $_SESSION['cliente']->id_cliente;

@@ -10,15 +10,7 @@
 
     <li><a href="../controllers/BebidaController.php?opcao=6" class="nav-link px-2 link-secondary">Nossas Bebidas</a></li>
 
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Clientes
-      </a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="cadastrarCliente.php">Cadastrar</a></li>
-        <li><a class="dropdown-item" href="meusDados.php">Seus dados</a></li>
-      </ul>
-    </li>
+    <li><a href="meusDados.php" class="nav-link px-2 link-dark">Seus dados</a></li>
 
     <li><a href="#" class="nav-link px-2 link-dark">Contato</a></li>
 
